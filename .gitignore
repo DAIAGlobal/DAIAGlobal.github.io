@@ -1,0 +1,7 @@
+# Root ignore for Pages build
+/daia-landing/node_modules
+/daia-landing/.next
+/daia-landing/out
+.DS_Store
+.env*
+.vercel
