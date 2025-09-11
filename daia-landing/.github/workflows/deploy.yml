@@ -39,10 +39,14 @@ jobs:
             echo "BASE_PATH=${{ vars.BASE_PATH }}" >> $GITHUB_ENV
           else
             REPO_NAME='${{ github.event.repository.name }}'
-            if echo "$REPO_NAME" | grep -qiE '\.github\.io$'; then
-              # User/Org pages deploy at root
+            OWNER='${{ github.repository_owner }}'
+            REPO_LC="$(echo "$REPO_NAME" | tr '[:upper:]' '[:lower:]')"
+            OWNER_SITE_LC="$(echo "${OWNER}.github.io" | tr '[:upper:]' '[:lower:]')"
+            if [ "$REPO_LC" = "$OWNER_SITE_LC" ]; then
+              # User/Org pages deploy at root (https://<owner>.github.io)
               echo "BASE_PATH=/" >> $GITHUB_ENV
             else
+              # Project pages deploy at https://<owner>.github.io/<repo>
               echo "BASE_PATH=/${REPO_NAME}" >> $GITHUB_ENV
             fi
           fi
