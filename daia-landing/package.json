@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "export": "next export",
-    "deploy:branch": "npm run build && robocopy .\\out .\\docs /MIR && powershell -Command \"New-Item -ItemType file -Path .\\docs\\.nojekyll -Force | Out-Null\"",
+    "deploy:branch": "npm run build && robocopy .\\out .\\docs /MIR && powershell -Command \"New-Item -ItemType file -Path .\\docs\\.nojekyll -Force | Out-Null\" && git add docs && git commit -m \"Deploy (Next15 build→out→/docs)\" && git push",
+    "redeploy": "git commit --allow-empty -m \"chore: force redeploy GitHub Pages\" && git push",
     "start": "next start",
     "lint": "eslint"
   },
