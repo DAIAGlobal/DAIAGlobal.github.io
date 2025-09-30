@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
+    "export": "next export",
+    "deploy:branch": "npm run build && robocopy .\\out .\\docs /MIR && powershell -Command \"New-Item -ItemType file -Path .\\docs\\.nojekyll -Force | Out-Null\"",
     "start": "next start",
     "lint": "eslint"
   },
