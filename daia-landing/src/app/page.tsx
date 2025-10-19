@@ -1,6 +1,7 @@
-'use client';
+'use client'; // si usás useState/useEffect en App Router
 import { motion } from "framer-motion";
 import { useEffect, useState, type FormEvent, type ReactNode } from "react";
+import UnitCard from "../components/UnitCard";
 
 /* ================== Utilidades de marca ================== */
 function BrandDAIA({ className }: { className?: string }) {
@@ -25,10 +26,6 @@ function BrandText({ text, className }: { text: string; className?: string }) {
   return <span className={className}>{out}</span>;
 }
 
-/* ================== Copy de misión (editable) ================== */
-const MISION =
-  "Investigar y desarrollar soluciones tecnológicas para que la innovación sea accesible a todos.";
-
 export default function DAIAHoldingLanding() {
   const DEFAULT_FORM_ENDPOINT = "https://formspree.io/f/xrbajroz";
   const FORM_ENDPOINT = process.env.NEXT_PUBLIC_FORM_ENDPOINT || DEFAULT_FORM_ENDPOINT;
@@ -36,6 +33,7 @@ export default function DAIAHoldingLanding() {
   const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || DEFAULT_CONTACT_EMAIL;
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState<null | { ok: boolean; message: string }>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [lang, setLang] = useState<"es" | "en">("es");
   useEffect(() => {
     try {
@@ -224,6 +222,7 @@ export default function DAIAHoldingLanding() {
           setSent({ ok: false, message: (isEN ? "Could not send. " : "No se pudo enviar. ") + (text || "") });
         }
       } catch (err) {
+        console.error(err);
         setSent({ ok: false, message: isEN ? "Network error while sending." : "Error de red al enviar." });
       } finally {
         setSending(false);
@@ -269,6 +268,17 @@ export default function DAIAHoldingLanding() {
           >
             {dict.nav.talk}
           </a>
+          {/* Mobile menu toggle */}
+          <div className="md:hidden flex items-center gap-2">
+            <button
+              aria-expanded={menuOpen}
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              onClick={() => setMenuOpen((s) => !s)}
+              className="px-3 py-2 rounded-lg border"
+            >
+              {menuOpen ? '✕' : '☰'}
+            </button>
+          </div>
           <button
             type="button"
             onClick={toggleLang}
@@ -279,6 +289,18 @@ export default function DAIAHoldingLanding() {
             {isEN ? 'EN' : 'ES'}
           </button>
         </div>
+        {/* Mobile menu panel */}
+        {menuOpen && (
+          <div className="md:hidden bg-white border-t">
+            <div className="px-4 py-3 flex flex-col gap-3">
+              <a href="#home" onClick={() => setMenuOpen(false)} className="hover:opacity-80">{dict.nav.home}</a>
+              <a href="#about" onClick={() => setMenuOpen(false)} className="hover:opacity-80">{dict.nav.about}</a>
+              <a href="#mission" onClick={() => setMenuOpen(false)} className="hover:opacity-80">{dict.nav.mission}</a>
+              <a href="#units" onClick={() => setMenuOpen(false)} className="hover:opacity-80">{dict.nav.units}</a>
+              <a href="#contact" onClick={() => setMenuOpen(false)} className="hover:opacity-80">{dict.nav.contact}</a>
+            </div>
+          </div>
+        )}
       </header>
 
       {/* Hero */}
@@ -426,6 +448,10 @@ export default function DAIAHoldingLanding() {
               accent="#06B6D4"
               activeLabel={dict.units.activeLabel}
               soonLabel={dict.units.soonLabel}
+              packages={[
+                { id: 'labs-core', name: 'Core Development', price: 'Custom' },
+                { id: 'labs-ai', name: 'AI Research', price: 'By estimate' },
+              ]}
             />
             <UnitCard
               title="DAIA Data"
@@ -434,6 +460,10 @@ export default function DAIAHoldingLanding() {
               accent="#6C4CE5"
               activeLabel={dict.units.activeLabel}
               soonLabel={dict.units.soonLabel}
+              packages={[
+                { id: 'data-basic', name: 'Analytics Starter', price: '$2k+' },
+                { id: 'data-enterprise', name: 'Enterprise BI', price: 'Custom' },
+              ]}
             />
             <UnitCard
               title="DAIA Properties"
@@ -442,6 +472,10 @@ export default function DAIAHoldingLanding() {
               accent="#10B981"
               activeLabel={dict.units.activeLabel}
               soonLabel={dict.units.soonLabel}
+              packages={[
+                { id: 'props-manage', name: 'Property Management', price: '$500/mo+' },
+                { id: 'props-invest', name: 'Investment Advisory', price: 'Custom' },
+              ]}
             />
             <UnitCard
               title="DAIA Pharma Labs"
@@ -450,6 +484,10 @@ export default function DAIAHoldingLanding() {
               accent="#F59E0B"
               activeLabel={dict.units.activeLabel}
               soonLabel={dict.units.soonLabel}
+              packages={[
+                { id: 'pharma-form', name: 'Formulation', price: 'Custom' },
+                { id: 'pharma-analysis', name: 'Analytical Services', price: 'Custom' },
+              ]}
             />
             <UnitCard
               title="DAIA Global"
@@ -458,6 +496,10 @@ export default function DAIAHoldingLanding() {
               accent="#06B6D4"
               activeLabel={dict.units.activeLabel}
               soonLabel={dict.units.soonLabel}
+              packages={[
+                { id: 'global-trade', name: 'Trade & Export', price: 'Custom' },
+                { id: 'global-fz', name: 'Free Zone Services', price: 'Custom' },
+              ]}
             />
           </div>
         </div>
@@ -545,48 +587,8 @@ export default function DAIAHoldingLanding() {
     </div>
   );
 }
-
-/* ================== componentes inline ================== */
-function UnitCard({
-  title,
-  desc,
-  status,
-  accent,
-  activeLabel,
-  soonLabel,
-}: {
-  title: string;
-  desc: string;
-  status: "active" | "soon";
-  accent: string;
-  activeLabel: string;
-  soonLabel: string;
-}) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-      className="rounded-3xl border bg-white p-6 shadow-sm relative overflow-hidden"
-    >
-      <div className="absolute -right-10 -top-10 size-24 rounded-full opacity-10" style={{ background: accent }} />
-      <h3 className="font-bold text-lg">
-        <BrandText text={title} />
-      </h3>
-      <p className="mt-2 text-sm text-neutral-700">{desc}</p>
-      <div className="mt-4 flex items-center gap-2">
-        {status === "active" ? (
-          <span className="text-xs font-semibold px-2 py-1 rounded-full" style={{ background: accent, color: "white" }}>
-            {activeLabel}
-          </span>
-        ) : (
-          <span className="text-xs font-semibold px-2 py-1 rounded-full border">{soonLabel}</span>
-        )}
-      </div>
-    </motion.div>
-  );
-}
+ 
+/* UnitCard has been moved to src/components/UnitCard.tsx */
 
 function ServiceCard({ title, text }: { title: string; text: string }) {
   return (

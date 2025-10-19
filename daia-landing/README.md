@@ -1,3 +1,33 @@
+# DAIA Landing
+
+Este repositorio contiene una landing implementada con Next.js (App Router). Para facilitar el despliegue en GitHub Pages incluimos un `index.html` estático (fallback) en la raíz y scripts para exportar la versión estática de Next 15 a `out/`.
+
+Rápido:
+
+- Desarrollo local:
+
+```powershell
+cd 'c:\Users\nicol\OneDrive\Escritorio\DAIA\daia-landing'
+npm install
+npm run dev
+```
+
+- Build estático (Next 15):
+
+```powershell
+npm run build
+```
+
+El build de Next 15 generará `out/` (si la configuración de Next está para export estático). Existen scripts en `package.json` para copiar `out/` a `docs/` (útil si usás la rama `main` y GitHub Pages configurado en `docs/`), por ejemplo:
+
+- `npm run deploy:docs` — hace build, copia `out/` a `docs/`, crea `.nojekyll` y realiza commit/push.
+- `npm run deploy:root` — hace build y copia `out/` a la raíz del repo (útil si querés servir desde la raíz).
+
+Si preferís usar `index.html` estático (sin ejecutar Next), GitHub Pages servirá el `index.html` de la raíz automáticamente.
+
+Notas:
+- Si querés una versión más fiel al `src/app/page.tsx` en Pages, genera `out/` con `next build` y luego usa `deploy:docs`.
+- Recomendación: configurar GitHub Pages para servir desde `docs/` si usás `deploy:docs`.
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Contact form (static hosting)
