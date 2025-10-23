@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-  "deploy:docs": "npm run build && powershell -Command \"robocopy .\\out .\\docs /MIR; if ($LASTEXITCODE -gt 3) { exit $LASTEXITCODE } else { exit 0 }\" && powershell -Command \"New-Item -ItemType file -Path .\\docs\\.nojekyll -Force | Out-Null\" && git add docs || true && git commit -m \"Deploy (Next15 build→out→/docs)\" || echo 'No changes to commit' && git push || echo 'Push failed'",
-  "deploy:root": "npm run build && powershell -Command \"robocopy .\\out .\\ /MIR; if ($LASTEXITCODE -gt 3) { exit $LASTEXITCODE } else { exit 0 }\" && powershell -Command \"New-Item -ItemType file -Path .\\.nojekyll -Force | Out-Null\" && git add . || true && git commit -m \"Deploy (Next15 build→out→root)\" || echo 'No changes to commit' && git push || echo 'Push failed'",
+    "start": "next start",
     "redeploy": "git commit --allow-empty -m \"chore: force redeploy GitHub Pages\" && git push"
   },
   "dependencies": {

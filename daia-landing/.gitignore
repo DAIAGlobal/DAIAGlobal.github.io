@@ -41,3 +41,8 @@ yarn-error.log*
 next-env.d.ts
 .vscode/
 tmp_page.txt
+
+# GitHub Pages / static export
+docs/
+index.html
+.nojekyll
