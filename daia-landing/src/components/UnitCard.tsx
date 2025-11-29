@@ -79,7 +79,7 @@ export default function UnitCard({
       <h3 className="font-bold text-lg">
         <BrandText text={title} />
       </h3>
-      <div className="mt-2 text-sm text-neutral-700 whitespace-pre-wrap">{desc}</div>
+      <p className="mt-2 text-sm text-neutral-700">{desc}</p>
       <div className="mt-4 flex items-center gap-2">
         {status === 'active' ? (
           <span className="text-xs font-semibold px-2 py-1 rounded-full" style={{ background: accent, color: 'white' }}>
@@ -90,25 +90,7 @@ export default function UnitCard({
         )}
       </div>
 
-      {/* preview of packages when not expanded */}
-      {packages && packages.length > 0 && !expanded && (
-        <div className="mt-3 flex flex-wrap gap-2">
-          {packages.slice(0, 3).map((p) => (
-            <button
-              key={p.id}
-              onClick={(e) => { e.stopPropagation(); setActivePackage(p); }}
-              className="text-xs px-2 py-1 rounded-full border hover:shadow-sm flex items-center gap-2"
-              title={`${p.name} — ${p.price}`}
-            >
-              <span className="font-medium">{p.name}</span>
-              <span className="text-neutral-600">{p.price}</span>
-            </button>
-          ))}
-          {packages.length > 3 && (
-            <div className="text-xs text-neutral-500 px-2 py-1 rounded-full border">+{packages.length - 3} más</div>
-          )}
-        </div>
-      )}
+      
 
       {/* reveal packages when expanded */}
       {expanded && packages && packages.length > 0 && (
