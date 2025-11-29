@@ -53,14 +53,6 @@ export async function POST(req: Request) {
 
     const text = await resp.text();
 
-    // Detect if Formspree is asking for reCAPTCHA (HTML or message contains captcha indicators)
-    const lower = (text || '').toLowerCase();
-    const wantsRecaptcha = lower.includes('recaptcha') || lower.includes('g-recaptcha') || lower.includes('captcha');
-    if (wantsRecaptcha) {
-      // Inform the client to show the 'gracias' page (or a captcha flow) — we'll use a flag
-      return NextResponse.json({ ok: true, recaptcha: true, message: 'reCAPTCHA required' });
-    }
-
     if (!resp.ok) {
       return NextResponse.json({ ok: false, message: text || 'Upstream error' }, { status: resp.status });
     }

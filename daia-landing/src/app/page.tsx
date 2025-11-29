@@ -234,12 +234,6 @@ export default function DAIAHoldingLanding() {
       });
 
       const json = await resp.json().catch(() => null);
-      // If Formspree asks for reCAPTCHA, show the 'gracias' page immediately
-      if (json?.recaptcha) {
-        window.location.href = 'gracias/';
-        return;
-      }
-
       if (resp.ok && json?.ok) {
         form.reset();
         setSent({ ok: true, message: isEN ? "Thanks! We’ll get back to you soon." : "¡Gracias! Te responderemos pronto." });
