@@ -183,7 +183,7 @@ export default function DAIAHoldingLanding() {
           desc: {
             labs: "I+D, IA y desarrollo de software. Delivery end-to-end.",
             data:
-              "DAIA Cloud Engine — Infraestructura Gestionada\n\nPlataforma de servidores cloud con operación completa incluida.",
+              "DAIA Cloud Engine — Infraestructura Gestionada: Plataforma de servidores cloud con operación completa incluida.",
             props: "Activos inmobiliarios y gestión de renta.",
             pharma: "Investigación farmacéutica y biotech: formulación, análisis y desarrollo preclínico.",
             global: "Exportación e inversiones desde Zona Franca.",
