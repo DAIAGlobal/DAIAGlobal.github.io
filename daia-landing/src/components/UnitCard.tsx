@@ -90,7 +90,18 @@ export default function UnitCard({
         )}
       </div>
 
-      
+      {/* Acción explícita para ver paquetes (mejora de accesibilidad/fiabilidad) */}
+      {!expanded && packages && packages.length > 0 && (
+        <div className="mt-3">
+          <button
+            onClick={(e) => { e.stopPropagation(); setExpanded(true); }}
+            className="px-3 py-2 rounded-md border text-sm font-medium"
+            aria-label="Ver paquetes"
+          >
+            Ver paquetes
+          </button>
+        </div>
+      )}
 
       {/* reveal packages when expanded */}
       {expanded && packages && packages.length > 0 && (
