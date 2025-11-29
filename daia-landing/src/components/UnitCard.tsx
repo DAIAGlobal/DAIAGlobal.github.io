@@ -79,7 +79,7 @@ export default function UnitCard({
       <h3 className="font-bold text-lg">
         <BrandText text={title} />
       </h3>
-      <p className="mt-2 text-sm text-neutral-700">{desc}</p>
+      <div className="mt-2 text-sm text-neutral-700 whitespace-pre-wrap">{desc}</div>
       <div className="mt-4 flex items-center gap-2">
         {status === 'active' ? (
           <span className="text-xs font-semibold px-2 py-1 rounded-full" style={{ background: accent, color: 'white' }}>
