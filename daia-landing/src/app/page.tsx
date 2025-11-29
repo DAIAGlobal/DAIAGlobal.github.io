@@ -196,42 +196,33 @@ export default function DAIAHoldingLanding() {
       return;
     }
 
-    // Envío a endpoint externo (Formspree / Formspark / etc.)
-    if (FORM_ENDPOINT) {
-      try {
-        setSending(true);
-        const resp = await fetch(FORM_ENDPOINT, {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Formspree-Api-Key": process.env.NEXT_PUBLIC_FORMSPREE_API_KEY || "https://formspree.io/f/xrbajroz",
-          },
-          body: new URLSearchParams({
-            name,
-            email,
-            message,
-            _subject: `Nuevo mensaje desde DAIA Holding`,
-          }),
-        });
-        if (resp.ok) {
-          form.reset();
-          setSent({ ok: true, message: isEN ? "Thanks! We’ll get back to you soon." : "¡Gracias! Te responderemos pronto." });
-          // Redirección suave a página de gracias (relativa para respetar basePath)
-          setTimeout(() => {
-            window.location.href = "gracias/";
-          }, 600);
-        } else {
-          const text = await resp.text();
-          setSent({ ok: false, message: (isEN ? "Could not send. " : "No se pudo enviar. ") + (text || "") });
-        }
-      } catch (err) {
-        console.error(err);
-        setSent({ ok: false, message: isEN ? "Network error while sending." : "Error de red al enviar." });
-      } finally {
-        setSending(false);
+    // Envío a nuestra API interna que reenvía a Formspree (server-side)
+    try {
+      setSending(true);
+      const resp = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ name, email, message, _subject: `Nuevo mensaje desde DAIA Holding` }),
+      });
+
+      const json = await resp.json().catch(() => null);
+      if (resp.ok && json?.ok) {
+        form.reset();
+        setSent({ ok: true, message: isEN ? "Thanks! We’ll get back to you soon." : "¡Gracias! Te responderemos pronto." });
+        setTimeout(() => {
+          window.location.href = 'gracias/';
+        }, 600);
+      } else {
+        const message = json?.message || (isEN ? 'Could not send.' : 'No se pudo enviar.');
+        setSent({ ok: false, message });
       }
-      return;
+    } catch (err) {
+      console.error(err);
+      setSent({ ok: false, message: isEN ? 'Network error while sending.' : 'Error de red al enviar.' });
+    } finally {
+      setSending(false);
     }
+    return;
 
     // Fallback: abrir cliente de correo
     if (CONTACT_EMAIL) {
