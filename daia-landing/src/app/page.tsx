@@ -35,7 +35,18 @@ export default function DAIAHoldingLanding() {
   const [sent, setSent] = useState<null | { ok: boolean; message: string }>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [lang, setLang] = useState<"es" | "en">("es");
+  const [captcha, setCaptcha] = useState<null | { a: number; b: number; expiry: number; sig: string }>(null);
   useEffect(() => {
+    // fetch a captcha challenge on mount
+    (async () => {
+      try {
+        const r = await fetch('/api/captcha');
+        if (r.ok) {
+          const j = await r.json();
+          setCaptcha(j);
+        }
+      } catch {}
+    })();
     try {
       const saved = typeof window !== 'undefined' ? window.localStorage.getItem('daia_lang') : null;
       if (saved === 'en' || saved === 'es') {
@@ -196,13 +207,30 @@ export default function DAIAHoldingLanding() {
       return;
     }
 
+    // verify we have a captcha loaded
+    if (!captcha) {
+      setSent({ ok: false, message: isEN ? 'Captcha not loaded.' : 'Captcha no cargado.' });
+      return;
+    }
+
     // Envío a nuestra API interna que reenvía a Formspree (server-side)
     try {
       setSending(true);
+      const captchaAnswer = (data.get('captcha') as string)?.trim();
       const resp = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({ name, email, message, _subject: `Nuevo mensaje desde DAIA Holding` }),
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+          _subject: `Nuevo mensaje desde DAIA Holding`,
+          captchaAnswer,
+          captchaA: captcha.a,
+          captchaB: captcha.b,
+          captchaExpiry: captcha.expiry,
+          captchaSig: captcha.sig,
+        }),
       });
 
       const json = await resp.json().catch(() => null);
@@ -550,6 +578,15 @@ export default function DAIAHoldingLanding() {
               placeholder={dict.contact.message}
               className="md:col-span-2 h-32 rounded-xl border p-4 outline-none focus:ring-4"
             />
+            {/* Simple math captcha (server-signed) */}
+            {captcha ? (
+              <div className="flex flex-col">
+                <label className="text-sm mb-1">{isEN ? 'Human check' : 'Verificación humana'}: ¿Cuánto es {captcha.a} + {captcha.b}?</label>
+                <input name="captcha" required placeholder={isEN ? 'Answer' : 'Respuesta'} className="h-11 rounded-xl border px-4 outline-none focus:ring-4" />
+              </div>
+            ) : (
+              <div className="flex items-center">{isEN ? 'Loading captcha...' : 'Cargando captcha...'}</div>
+            )}
             {/* honeypot */}
             <input type="text" name="_gotcha" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
             <button
