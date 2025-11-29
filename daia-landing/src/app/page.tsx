@@ -523,7 +523,6 @@ export default function DAIAHoldingLanding() {
           <form
             className="mt-8 grid md:grid-cols-2 gap-4"
             method="post"
-            action={FORM_ENDPOINT || undefined}
             onSubmit={handleSubmit}
           >
             <input type="hidden" name="_subject" value="Nuevo mensaje desde DAIA Holding" />
