@@ -93,7 +93,8 @@ export default function DAIAHoldingLanding() {
           soonLabel: "Coming Soon",
           desc: {
             labs: "R&D, AI and software development. End-to-end delivery.",
-            data: "Databases, dashboards and analytics.",
+            data:
+              "DAIA Data & Infrastructure — Intelligent infrastructure for a connected world. We empower companies with managed cloud servers, scalable compute, on-demand AI models and specialized support for critical operations.\n\nDAIA Cloud Engine — Managed Infrastructure\nEnterprise-grade cloud with dedicated servers and full management. Corporate scalability without technical complexity.\n\nIncludes: Virtual servers (VPS), firewall, backups, monitoring and security, OS tuning and optimization, data & app migration, direct support and enterprise SLA. Ideal for startups, e-commerce, fintech, call centers and SaaS.",
             props: "Real estate assets and rent management.",
             pharma: "Pharmaceutical and biotech research: formulation, analysis and preclinical development.",
             global: "Export and investments from Free Trade Zone.",
@@ -153,7 +154,8 @@ export default function DAIAHoldingLanding() {
           soonLabel: "Próximamente",
           desc: {
             labs: "I+D, IA y desarrollo de software. Delivery end-to-end.",
-            data: "Bases de datos, dashboards y analítica.",
+            data:
+              "DAIA Data & Infrastructure — Infraestructura inteligente para un mundo conectado. Potenciamos empresas con servidores cloud gestionados, cómputo escalable, modelos de IA bajo demanda y soporte especializado para operaciones críticas.\n\nDAIA Cloud Engine — Infraestructura Gestionada\nPlataforma cloud con servidores dedicados y gestión completa. Escalabilidad corporativa sin complejidad técnica.\n\nIncluye:\n- Servidores virtuales (VPS) en la nube\n- Firewall, backups, monitoreo y seguridad\n- OS tuning y optimización\n- Migración de datos y aplicaciones\n- Soporte técnico directo y SLA empresarial\n\nIdeal para: Startups, e-commerce, fintech, call centers, SaaS.",
             props: "Activos inmobiliarios y gestión de renta.",
             pharma: "Investigación farmacéutica y biotech: formulación, análisis y desarrollo preclínico.",
             global: "Exportación e inversiones desde Zona Franca.",
@@ -454,16 +456,17 @@ export default function DAIAHoldingLanding() {
               ]}
             />
             <UnitCard
-              title="DAIA Data"
-              desc={dict.units.desc.data}
-              status="soon"
-              accent="#6C4CE5"
-              activeLabel={dict.units.activeLabel}
-              soonLabel={dict.units.soonLabel}
-              packages={[
-                { id: 'data-basic', name: 'Analytics Starter', price: '$2k+' },
-                { id: 'data-enterprise', name: 'Enterprise BI', price: 'Custom' },
-              ]}
+              title="DAIA Data & Infrastructure"
+                desc={dict.units.desc.data}
+                status="soon"
+                accent="#6C4CE5"
+                activeLabel={dict.units.activeLabel}
+                soonLabel={dict.units.soonLabel}
+                packages={[
+                  { id: 'starter-node', name: 'Starter Node — 1 vCPU / 1GB', price: '$10/mo' },
+                  { id: 'pro-node', name: 'Pro Node — 2 vCPU / 4GB', price: '$25/mo' },
+                  { id: 'ultra-node', name: 'Ultra Node — 4 vCPU / 8GB', price: '$70/mo' },
+                ]}
             />
             <UnitCard
               title="DAIA Properties"
