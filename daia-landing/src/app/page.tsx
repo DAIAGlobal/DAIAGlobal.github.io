@@ -38,15 +38,6 @@ export default function DAIAHoldingLanding() {
   
   useEffect(() => {
     // fetch a captcha challenge on mount
-    (async () => {
-      try {
-        const r = await fetch('/api/captcha');
-        if (r.ok) {
-          const j = await r.json();
-          setCaptcha(j);
-        }
-      } catch {}
-    })();
     try {
       const saved = typeof window !== 'undefined' ? window.localStorage.getItem('daia_lang') : null;
       if (saved === 'en' || saved === 'es') {
