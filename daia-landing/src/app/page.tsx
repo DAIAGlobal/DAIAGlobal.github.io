@@ -183,7 +183,7 @@ export default function DAIAHoldingLanding() {
           desc: {
             labs: "I+D, IA y desarrollo de software. Delivery end-to-end.",
             data:
-              "DAIA Data & Infrastructure\nDAIA Cloud Engine — Infraestructura Gestionada\n\nPlataforma de servidores cloud con operación completa incluida.\n\nCaracterísticas:\n\nServidores virtuales (VPS) optimizados\n\nSeguridad, firewall y hardening\n\nBackups automáticos\n\nMonitoreo y alertas\n\nOptimización del sistema operativo\n\nMigración de datos y aplicaciones\n\nSoporte técnico con SLA\n\nPlanes\nStarter Node — USD 10/mes\n\n1 vCPU\n\n1 GB RAM\n\n20 GB SSD\n\n2 TB transferencia\n\nGestión básica\n\nPro Node — USD 25/mes\n\n2 vCPU\n\n4 GB RAM\n\n40 GB SSD\n\nBackups semanales\n\nSoporte prioritario\n\nUltra Node — USD 70/mes\n\n4 vCPU\n\n8 GB RAM\n\n80 GB SSD\n\nAlta disponibilidad básica\n\nBackups diarios\n\nSLA 99.9%\n\nEnterprise — A cotizar\n\nSoluciones personalizadas en arquitectura, escalamiento, redundancia, redes privadas y auditorías de seguridad.\n\nModel Marketplace — IA On-Demand\n\nModelos listos para integración mediante API.\nTranscripción (Whisper)\n\nModelos de clasificación\n\nModelos de anomalías\n\nAnálisis de clientes\n\nFacturación por consumo (pay-per-use)\n\nSRE & Servicios Profesionales\n\nServicios avanzados para optimizar y asegurar entornos productivos.\n\nServicios:\n\nAuditoría de infraestructura\n\nOptimización de costos\n\nSeguridad avanzada\n\nDeploy de aplicaciones críticas\n\nObservabilidad 24/7\n\nDesde USD 25 por intervención\n\nAdd-ons\n\nMonitoreo avanzado: +USD 5\n\nBackups adicionales: +USD 10\n\nDeploy y configuración de apps: USD 20–80\n\nHardening de seguridad: USD 30–50",
+              "DAIA Cloud Engine — Infraestructura Gestionada\n\nPlataforma de servidores cloud con operación completa incluida.",
             props: "Activos inmobiliarios y gestión de renta.",
             pharma: "Investigación farmacéutica y biotech: formulación, análisis y desarrollo preclínico.",
             global: "Exportación e inversiones desde Zona Franca.",
@@ -490,6 +490,7 @@ export default function DAIAHoldingLanding() {
                 accent="#6C4CE5"
                 activeLabel={dict.units.activeLabel}
                 soonLabel={dict.units.soonLabel}
+                packages={dataPackages}
             />
             <UnitCard
               title="DAIA Properties"
