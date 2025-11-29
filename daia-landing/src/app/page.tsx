@@ -463,10 +463,17 @@ export default function DAIAHoldingLanding() {
                 activeLabel={dict.units.activeLabel}
                 soonLabel={dict.units.soonLabel}
                 packages={[
-                  { id: 'starter-node', name: 'Starter Node — 1 vCPU / 1GB', price: '$10/mo' },
-                  { id: 'pro-node', name: 'Pro Node — 2 vCPU / 4GB', price: '$25/mo' },
-                  { id: 'ultra-node', name: 'Ultra Node — 4 vCPU / 8GB', price: '$70/mo' },
-                ]}
+                    { id: 'starter-node', name: 'Starter Node', price: '$10/mo', desc: '1 vCPU · 1 GB RAM · 20 GB SSD · 2 TB transfer · Gestión básica', bullets: ['1 vCPU','1 GB RAM','20 GB SSD','2 TB transferencia','Gestión básica'] },
+                    { id: 'pro-node', name: 'Pro Node', price: '$25/mo', desc: '2 vCPU · 4 GB RAM · 40 GB SSD · Backups semanales · Soporte prioritario', bullets: ['2 vCPU','4 GB RAM','40 GB SSD','Backups semanales','Soporte prioritario'] },
+                    { id: 'ultra-node', name: 'Ultra Node', price: '$70/mo', desc: '4 vCPU · 8 GB RAM · 80 GB SSD · HA básica · Backups diarios · SLA 99.9%', bullets: ['4 vCPU','8 GB RAM','80 GB SSD','HA básica','Backups diarios','SLA 99.9%'] },
+                    { id: 'cloud-engine', name: 'DAIA Cloud Engine — Infraestructura Gestionada', price: 'Contact', desc: 'Plataforma cloud con servidores dedicados y gestión completa. Escalabilidad corporativa sin complejidad técnica.', bullets: ['Servidores virtuales (VPS)','Firewall, backups, monitoreo y seguridad','OS tuning y optimización','Migración de datos y aplicaciones','Soporte técnico directo y SLA empresarial'] },
+                    { id: 'model-marketplace', name: 'Model Marketplace — IA On-Demand', price: 'Pay per use', desc: 'Modelos optimizados listos para usar con facturación por consumo. APIs plug-and-play.', bullets: ['Modelos de clasificación','Transcripción (Whisper)','Detección de anomalías','Modelos para análisis de clientes','Facturación por consumo'] },
+                    { id: 'sre-services', name: 'SRE & Servicios Profesionales', price: 'From $25', desc: 'Acompañamiento experto para escalar infraestructura y mantener operaciones críticas.', bullets: ['Hardening de seguridad','Auditoría de infraestructura','Optimización de costos','Deploy de aplicaciones críticas','Observabilidad 24/7'] },
+                    { id: 'monitoring-addon', name: 'Monitoring avanzado (Add-on)', price: '+$5', desc: 'Monitoreo y alertas avanzadas.' },
+                    { id: 'backups-addon', name: 'Backups extra (Add-on)', price: '+$10', desc: 'Backups adicionales retenidos según política.' },
+                    { id: 'deploy-addon', name: 'Deploy de apps (Add-on)', price: '+$20–80', desc: 'Despliegue y configuración de la aplicación en la plataforma.' },
+                    { id: 'security-addon', name: 'Seguridad avanzada (Add-on)', price: '+$30–50', desc: 'Hardening y reglas avanzadas de seguridad.' },
+                  ]}
             />
             <UnitCard
               title="DAIA Properties"

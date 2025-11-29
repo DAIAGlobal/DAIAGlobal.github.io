@@ -39,7 +39,7 @@ export default function UnitCard({
   accent: string;
   activeLabel: string;
   soonLabel: string;
-  packages?: Array<{ id: string; name: string; price: string }>;
+  packages?: Array<{ id: string; name: string; price: string; desc?: string; bullets?: string[] }>;
 }) {
   const [expanded, setExpanded] = useState(false);
   const [hover, setHover] = useState(false);
@@ -94,20 +94,30 @@ export default function UnitCard({
       {expanded && packages && packages.length > 0 && (
         <div className="mt-4 border-t pt-4 space-y-3">
           {packages.map((p) => (
-            <div key={p.id} className="flex items-center justify-between">
-              <div>
-                <div className="font-medium">{p.name}</div>
-                <div className="text-xs text-neutral-600">{p.id}</div>
+            <div key={p.id} className="flex flex-col gap-2 border-b pb-3">
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="font-medium">{p.name}</div>
+                  <div className="text-xs text-neutral-600">{p.id}</div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="text-sm font-semibold">{p.price}</div>
+                  <button
+                    onClick={(e) => { e.stopPropagation(); setActivePackage(p); }}
+                    className="text-sm px-3 py-1 rounded-md border"
+                  >
+                    Ver
+                  </button>
+                </div>
               </div>
-              <div className="flex items-center gap-3">
-                <div className="text-sm font-semibold">{p.price}</div>
-                <button
-                  onClick={(e) => { e.stopPropagation(); setActivePackage(p); }}
-                  className="text-sm px-3 py-1 rounded-md border"
-                >
-                  Ver
-                </button>
-              </div>
+              {p.desc && <div className="text-sm text-neutral-700">{p.desc}</div>}
+              {p.bullets && (
+                <ul className="text-xs text-neutral-600 list-disc ml-4 mt-1">
+                  {p.bullets.map((b, i) => (
+                    <li key={i}>{b}</li>
+                  ))}
+                </ul>
+              )}
             </div>
           ))}
         </div>
