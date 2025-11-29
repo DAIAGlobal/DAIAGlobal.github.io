@@ -202,7 +202,10 @@ export default function DAIAHoldingLanding() {
         setSending(true);
         const resp = await fetch(FORM_ENDPOINT, {
           method: "POST",
-          headers: { Accept: "application/json" },
+          headers: {
+            Accept: "application/json",
+            "Formspree-Api-Key": process.env.NEXT_PUBLIC_FORMSPREE_API_KEY || "https://formspree.io/f/xrbajroz",
+          },
           body: new URLSearchParams({
             name,
             email,
