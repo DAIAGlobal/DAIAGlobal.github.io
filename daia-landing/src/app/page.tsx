@@ -483,14 +483,25 @@ export default function DAIAHoldingLanding() {
                 { id: 'labs-ai', name: 'AI Research', price: 'By estimate' },
               ]}
             />
+            {/* Mostrar solo el paquete 'enterprise' en la tarjeta según solicitud */}
             <UnitCard
               title="DAIA Data & Infrastructure"
-                desc={dict.units.desc.data}
-                status="soon"
-                accent="#6C4CE5"
-                activeLabel={dict.units.activeLabel}
-                soonLabel={dict.units.soonLabel}
-                packages={dataPackages}
+              desc={(() => {
+                const p = dataPackages.find((p) => p.id === 'enterprise');
+                return p?.desc ?? dict.units.desc.data;
+              })()}
+              status="soon"
+              accent="#6C4CE5"
+              activeLabel={dict.units.activeLabel}
+              soonLabel={dict.units.soonLabel}
+              packages={[
+                dataPackages.find((p) => p.id === 'enterprise') ?? {
+                  id: 'enterprise',
+                  name: 'Enterprise — Enterprise',
+                  price: 'Custom',
+                  desc: 'Soluciones personalizadas en arquitectura, escalamiento, redundancia, redes privadas y auditorías de seguridad.',
+                },
+              ]}
             />
             <UnitCard
               title="DAIA Properties"
