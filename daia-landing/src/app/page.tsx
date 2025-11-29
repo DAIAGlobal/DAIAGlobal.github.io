@@ -35,7 +35,7 @@ export default function DAIAHoldingLanding() {
   const [sent, setSent] = useState<null | { ok: boolean; message: string }>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [lang, setLang] = useState<"es" | "en">("es");
-  const [captcha, setCaptcha] = useState<null | { a: number; b: number; expiry: number; sig: string }>(null);
+  
   useEffect(() => {
     // fetch a captcha challenge on mount
     (async () => {
@@ -207,42 +207,30 @@ export default function DAIAHoldingLanding() {
       return;
     }
 
-    // verify we have a captcha loaded
-    if (!captcha) {
-      setSent({ ok: false, message: isEN ? 'Captcha not loaded.' : 'Captcha no cargado.' });
-      return;
-    }
-
-    // Envío a nuestra API interna que reenvía a Formspree (server-side)
+    // Envío directo al endpoint público de formularios (Formspree u otro configurado)
     try {
       setSending(true);
-      const captchaAnswer = (data.get('captcha') as string)?.trim();
-      const resp = await fetch('/api/contact', {
+      const resp = await fetch(FORM_ENDPOINT, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
+        headers: { Accept: 'application/json' },
+        body: new URLSearchParams({
           name,
           email,
           message,
           _subject: `Nuevo mensaje desde DAIA Holding`,
-          captchaAnswer,
-          captchaA: captcha.a,
-          captchaB: captcha.b,
-          captchaExpiry: captcha.expiry,
-          captchaSig: captcha.sig,
         }),
       });
 
-      const json = await resp.json().catch(() => null);
-      if (resp.ok && json?.ok) {
+      if (resp.ok) {
         form.reset();
         setSent({ ok: true, message: isEN ? "Thanks! We’ll get back to you soon." : "¡Gracias! Te responderemos pronto." });
+        // Redirección suave a página de gracias (relativa para respetar basePath)
         setTimeout(() => {
           window.location.href = 'gracias/';
         }, 600);
       } else {
-        const message = json?.message || (isEN ? 'Could not send.' : 'No se pudo enviar.');
-        setSent({ ok: false, message });
+        const text = await resp.text();
+        setSent({ ok: false, message: (isEN ? 'Could not send. ' : 'No se pudo enviar. ') + (text || '') });
       }
     } catch (err) {
       console.error(err);
@@ -250,7 +238,6 @@ export default function DAIAHoldingLanding() {
     } finally {
       setSending(false);
     }
-    return;
 
     // Fallback: abrir cliente de correo
     if (CONTACT_EMAIL) {
@@ -572,15 +559,7 @@ export default function DAIAHoldingLanding() {
               placeholder={dict.contact.message}
               className="md:col-span-2 h-32 rounded-xl border p-4 outline-none focus:ring-4"
             />
-            {/* Simple math captcha (server-signed) */}
-            {captcha ? (
-              <div className="flex flex-col">
-                <label className="text-sm mb-1">{isEN ? 'Human check' : 'Verificación humana'}: ¿Cuánto es {captcha.a} + {captcha.b}?</label>
-                <input name="captcha" required placeholder={isEN ? 'Answer' : 'Respuesta'} className="h-11 rounded-xl border px-4 outline-none focus:ring-4" />
-              </div>
-            ) : (
-              <div className="flex items-center">{isEN ? 'Loading captcha...' : 'Cargando captcha...'}</div>
-            )}
+            {/* honeypot */}
             {/* honeypot */}
             <input type="text" name="_gotcha" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
             <button
