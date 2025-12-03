@@ -90,10 +90,11 @@ export default function DAIAHoldingLanding() {
     ? {
         nav: { home: "Home", about: "About", mission: "Mission", units: "Subsidiaries", contact: "Contact", talk: "Let’s Talk" },
         hero: {
+          title: "DAIA Holding: Infrastructure, Technology and Integrated Business Services.",
           intro:
-            "Scaling innovation through specialized expertise. DAIA is a holding company that develops transformative technological solutions with global impact, combining research-driven innovation with professional execution to create sustainable competitive advantage.",
-          seeUnits: "Explore Subsidiaries",
-          contact: "Get in Touch",
+            "A holding company designed to lead cloud solutions, software, support and data with corporate focus and global scalability.",
+          seeUnits: "Explore Units",
+          contact: "Contact Management",
         },
         mission: {
           title: "Our Mission & Vision",
@@ -101,31 +102,33 @@ export default function DAIAHoldingLanding() {
           chips: ["Advanced R&D", "Operational Excellence", "Strategic Growth"],
         },
         about: {
-          title: "About DAIA Holding",
+          title: "Who We Are",
           body:
-            "DAIA is a Uruguayan-headquartered holding company structured to identify, develop, and scale high-impact technological and infrastructure solutions. Our evolution—from N&B through InnoviNex to DAIA—reflects our commitment to operational excellence and disciplined growth. We operate through a matrix organization of specialized subsidiaries, each expertly focused and independently executed.",
+            "DAIA is a technology holding focused on delivering high-performance enterprise solutions. Integrating cloud infrastructure, software development, operational support and analytics, DAIA acts as a complete ecosystem for organizations that need reliable, scalable and secure technology.",
           bullets: [
-            "• Governance: Clear structure with transparent accountability and decision-making.",
-            "• Execution: Autonomous subsidiaries with unified strategic direction.",
-            "• Vision: Long-term value creation through innovation, operational rigor, and market diversification.",
+            "• 24/7 Operations",
+            "• Corporate Security Protocols",
+            "• Scalable Architectures",
+            "• Modular Services with High Impact",
+            "• International Expansion Vision",
           ],
-          focus: "2025 Strategic Focus",
-          focusBadges: ["Advanced Technology", "Real Estate & Infrastructure", "Life Sciences", "Global Trade"],
-          focusLinePre: "Leading growth with ",
-          focusLinePost: ", while scaling complementary subsidiaries.",
+          focus: "Core Units 2025",
+          focusBadges: ["Cloud Infrastructure", "Software Development", "Technical Support", "Data & Analytics"],
+          focusLinePre: "Operating across ",
+          focusLinePost: ", DAIA delivers integrated enterprise solutions.",
         },
         units: {
-          title: "Our Subsidiaries",
-          subtitle: "Currently operational: ",
+          title: "Our Core Units",
+          subtitle: "Enterprise solutions powered by: ",
           activeLabel: "Live",
-          soonLabel: "2025 Launch",
+          soonLabel: "Development",
           desc: {
-            labs: "Advanced R&D in software engineering, AI, and cloud-native solutions. End-to-end delivery with enterprise-grade execution.",
+            labs: "High-performance cloud infrastructure: VPS, Dedicated Virtual Servers and enterprise deployments. Security, scalability and continuous operation.",
             data:
-              "Cloud infrastructure, managed services, and enterprise deployment platform. Engineered for scale, reliability, and operational excellence.",
-            props: "Strategic real estate portfolio and institutional-grade property management and investment services.",
-            pharma: "Pharmaceutical R&D: molecular formulation, analytical testing, and preclinical development for therapeutic advancement.",
-            global: "International trade, export optimization, and Free Zone investment strategy for global market expansion.",
+              "Enterprise software applications, APIs, integrations and automation solutions for companies requiring quality and results.",
+            props: "Specialized technical support, monitoring, maintenance, remote assistance and dedicated support for enterprises.",
+            pharma: "Advanced analytics, applied AI, intelligent automation and process optimization for enterprise intelligence.",
+            global: "Global cloud expansion and managed services across multiple regions and compliance frameworks.",
           },
         },
         what: {
@@ -152,9 +155,9 @@ export default function DAIAHoldingLanding() {
         nav: { home: "Inicio", about: "Quiénes somos", mission: "Misión", units: "Filiales", contact: "Contacto", talk: "Hablemos" },
         hero: {
           intro:
-            "Escalando innovación a través de experiencia especializada. DAIA es un holding que desarrolla soluciones tecnológicas transformacionales con impacto global, combinando innovación impulsada por investigación con ejecución profesional para crear ventaja competitiva sostenible.",
-          seeUnits: "Explorar Filiales",
-          contact: "Contáctanos",
+            "Un holding diseñado para liderar soluciones cloud, software, soporte y datos con enfoque corporativo y escalabilidad global.",
+          seeUnits: "Explorar Unidades",
+          contact: "Contactar Dirección",
         },
         mission: {
           title: "Misión & Visión",
@@ -162,31 +165,33 @@ export default function DAIAHoldingLanding() {
           chips: ["I+D Avanzada", "Excelencia Operacional", "Crecimiento Estratégico"],
         },
         about: {
-          title: "Sobre DAIA Holding",
+          title: "Quiénes Somos",
           body:
-            "DAIA es un holding con sede en Uruguay estructurado para identificar, desarrollar y escalar soluciones tecnológicas e infraestructurales de alto impacto. Nuestra evolución—de N&B a través de InnoviNex hacia DAIA—refleja nuestro compromiso con excelencia operacional y crecimiento disciplinado. Operamos a través de una organización matricial de filiales especializadas, cada una enfocada y ejecutada de forma independiente.",
+            "DAIA es un holding tecnológico orientado a entregar soluciones empresariales de alto desempeño. Integrando infraestructura cloud, desarrollo de software, soporte operativo y analítica, DAIA actúa como un ecosistema completo para organizaciones que necesitan tecnología confiable, escalable y segura.",
           bullets: [
-            "• Gobernanza: Estructura clara con responsabilidad y decisión transparente.",
-            "• Ejecución: Filiales autónomas con dirección estratégica unificada.",
-            "• Visión: Creación de valor a largo plazo mediante innovación, rigor operacional y diversificación de mercados.",
+            "• Operación 24/7",
+            "• Protocolos de Seguridad Corporativa",
+            "• Arquitecturas Escalables",
+            "• Servicios Modulares de Alto Impacto",
+            "• Visión de Expansión Internacional",
           ],
-          focus: "Enfoque Estratégico 2025",
-          focusBadges: ["Tecnología Avanzada", "Real Estate e Infraestructura", "Ciencias de la Vida", "Comercio Global"],
-          focusLinePre: "Liderando el crecimiento con ",
-          focusLinePost: ", escalando filiales complementarias.",
+          focus: "Unidades Centrales 2025",
+          focusBadges: ["Infraestructura Cloud", "Desarrollo de Software", "Soporte Técnico", "Data & Analytics"],
+          focusLinePre: "Operando en ",
+          focusLinePost: ", DAIA entrega soluciones empresariales integradas.",
         },
         units: {
-          title: "Nuestras Filiales",
-          subtitle: "En operación actualmente: ",
+          title: "Nuestras Unidades Centrales",
+          subtitle: "Soluciones empresariales impulsadas por: ",
           activeLabel: "Activa",
-          soonLabel: "Lanzamiento 2025",
+          soonLabel: "En Desarrollo",
           desc: {
-            labs: "I+D avanzada en ingeniería de software, IA y soluciones cloud-native. Delivery end-to-end con ejecución de nivel empresarial.",
+            labs: "Infraestructura cloud de alto rendimiento: VPS, Servidores Dedicados y despliegues empresariales. Seguridad, escalabilidad y operación continua.",
             data:
-              "Infraestructura cloud, servicios gestionados y plataforma de despliegue empresarial. Diseñada para escalabilidad, confiabilidad y excelencia operacional.",
-            props: "Cartera inmobiliaria estratégica con servicios institucionales de gestión de activos e inversión inmobiliaria.",
-            pharma: "I+D farmacéutico: formulación molecular, análisis experimental y desarrollo preclínico para avance terapéutico.",
-            global: "Comercio internacional, optimización de exportaciones y estrategia de inversión en Zona Franca para expansión global.",
+              "Aplicaciones de software empresarial, APIs, integraciones y soluciones de automatización para empresas que requieren calidad y resultados.",
+            props: "Soporte técnico especializado, monitoreo, mantenimiento, asistencia remota y soporte dedicado para empresas.",
+            pharma: "Analítica avanzada, IA aplicada, automatización inteligente y optimización de procesos para inteligencia empresarial.",
+            global: "Expansión cloud global y servicios gestionados en múltiples regiones y marcos de cumplimiento.",
           },
         },
         what: {
@@ -352,12 +357,9 @@ export default function DAIAHoldingLanding() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight"
+            className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight"
           >
-            <span role="text" className="inline-flex items-baseline">
-              <BrandDAIA />
-              <span className="ml-2 text-neutral-900">Holding</span>
-            </span>
+            <BrandText text="DAIA Holding: Infrastructure, Technology and Integrated Business Services." />
           </motion.h1>
 
           <motion.p
@@ -472,71 +474,51 @@ export default function DAIAHoldingLanding() {
 
           <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <UnitCard
-              title="DAIA Labs"
-              desc={dict.units.desc.labs}
+              title="DAIA Cloud"
+              desc="High-performance cloud infrastructure: VPS, Dedicated Virtual Servers and enterprise deployments. Security, scalability and continuous operation."
               status="active"
               accent="#06B6D4"
               activeLabel={dict.units.activeLabel}
               soonLabel={dict.units.soonLabel}
               packages={[
-                { id: 'labs-core', name: 'Core Development', price: 'Custom' },
-                { id: 'labs-ai', name: 'AI Research', price: 'By estimate' },
+                { id: 'cloud-vps', name: 'VPS Standard', price: 'From $10/mo' },
+                { id: 'cloud-dedicated', name: 'Dedicated Servers', price: 'Custom' },
               ]}
             />
-            {/* Mostrar solo el paquete 'enterprise' en la tarjeta según solicitud */}
             <UnitCard
-              title="DAIA Data & Infrastructure"
-              desc={(() => {
-                const p = dataPackages.find((p) => p.id === 'enterprise');
-                return p?.desc ?? dict.units.desc.data;
-              })()}
+              title="DAIA Software Lab"
+              desc="Enterprise software applications, APIs, integrations and automation solutions for companies requiring quality and results."
               status="active"
               accent="#6C4CE5"
               activeLabel={dict.units.activeLabel}
               soonLabel={dict.units.soonLabel}
               packages={[
-                dataPackages.find((p) => p.id === 'enterprise') ?? {
-                  id: 'enterprise',
-                  name: 'Enterprise',
-                  price: 'Custom',
-                  desc: 'Soluciones personalizadas en arquitectura, escalamiento, redundancia, redes privadas y auditorías de seguridad.',
-                },
+                { id: 'soft-dev', name: 'Custom Development', price: 'By Project' },
+                { id: 'soft-api', name: 'API Integration', price: 'Custom' },
               ]}
             />
             <UnitCard
-              title="DAIA Properties"
-              desc={dict.units.desc.props}
-              status="soon"
+              title="DAIA Support"
+              desc="Specialized technical support, monitoring, maintenance, remote assistance and dedicated support for enterprises."
+              status="active"
               accent="#10B981"
               activeLabel={dict.units.activeLabel}
               soonLabel={dict.units.soonLabel}
               packages={[
-                { id: 'props-manage', name: 'Property Management', price: '$500/mo+' },
-                { id: 'props-invest', name: 'Investment Advisory', price: 'Custom' },
+                { id: 'support-basic', name: 'Support Plan Basic', price: 'From $500/mo' },
+                { id: 'support-premium', name: 'Premium Support', price: 'Custom' },
               ]}
             />
             <UnitCard
-              title="DAIA Pharma Labs"
-              desc={dict.units.desc.pharma}
-              status="soon"
+              title="DAIA Data & Analytics"
+              desc="Advanced analytics, applied AI, intelligent automation and process optimization for enterprise intelligence."
+              status="active"
               accent="#F59E0B"
               activeLabel={dict.units.activeLabel}
               soonLabel={dict.units.soonLabel}
               packages={[
-                { id: 'pharma-form', name: 'Formulation', price: 'Custom' },
-                { id: 'pharma-analysis', name: 'Analytical Services', price: 'Custom' },
-              ]}
-            />
-            <UnitCard
-              title="DAIA Global"
-              desc={dict.units.desc.global}
-              status="soon"
-              accent="#06B6D4"
-              activeLabel={dict.units.activeLabel}
-              soonLabel={dict.units.soonLabel}
-              packages={[
-                { id: 'global-trade', name: 'Trade & Export', price: 'Custom' },
-                { id: 'global-fz', name: 'Free Zone Services', price: 'Custom' },
+                { id: 'data-analytics', name: 'Analytics Platform', price: 'Custom' },
+                { id: 'data-ai', name: 'AI Solutions', price: 'By Estimate' },
               ]}
             />
           </div>
