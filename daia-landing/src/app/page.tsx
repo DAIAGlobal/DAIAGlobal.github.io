@@ -154,6 +154,7 @@ export default function DAIAHoldingLanding() {
     : {
         nav: { home: "Inicio", about: "Quiénes somos", mission: "Misión", units: "Filiales", contact: "Contacto", talk: "Hablemos" },
         hero: {
+          title: "DAIA Holding: Infraestructura, Tecnología y Servicios Empresariales Integrados.",
           intro:
             "Un holding diseñado para liderar soluciones cloud, software, soporte y datos con enfoque corporativo y escalabilidad global.",
           seeUnits: "Explorar Unidades",
@@ -359,7 +360,7 @@ export default function DAIAHoldingLanding() {
             transition={{ duration: 0.6 }}
             className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight"
           >
-            <BrandText text="DAIA Holding: Infrastructure, Technology and Integrated Business Services." />
+            <BrandText text={isEN ? "DAIA Holding: Infrastructure, Technology and Integrated Business Services." : "DAIA Holding: Infraestructura, Tecnología y Servicios Empresariales Integrados."} />
           </motion.h1>
 
           <motion.p
