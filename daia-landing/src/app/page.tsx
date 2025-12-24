@@ -1,7 +1,6 @@
 'use client'; // si usás useState/useEffect en App Router
 import { motion } from "framer-motion";
-import { useEffect, useState, type FormEvent, type ReactNode } from "react";
-import UnitCard from "../components/UnitCard";
+import { useEffect, useState, useMemo, type FormEvent, type ReactNode } from "react";
 
 /* ================== Utilidades de marca ================== */
 function BrandDAIA({ className }: { className?: string }) {
@@ -35,6 +34,13 @@ export default function DAIAHoldingLanding() {
   const [sent, setSent] = useState<null | { ok: boolean; message: string }>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [lang, setLang] = useState<"es" | "en">("es");
+  const [isTermsModalOpen, setIsTermsModalOpen] = useState(false);
+  
+  // State for Ecosystems Logic
+  const [selectedService, setSelectedService] = useState<string | null>(null);
+  
+  // State for Data Calculator
+  const [dataConfig, setDataConfig] = useState({ volume: 1000, level: 'basic' as 'basic'|'standard'|'advanced', freq: 'monthly' });
   
   useEffect(() => {
     // fetch a captcha challenge on mount
@@ -57,34 +63,6 @@ export default function DAIAHoldingLanding() {
       return next;
     });
   };
-
-  // Packages for the DAIA Data & Infrastructure unit, language-aware
-  const dataPackages = isEN
-    ? [
-        { id: 'starter-node', name: 'Starter Node', price: '$10/mo', desc: '1 vCPU · 1 GB RAM · 20 GB SSD · 2 TB transfer · Basic management', bullets: ['1 vCPU','1 GB RAM','20 GB SSD','2 TB transfer','Basic management'] },
-        { id: 'pro-node', name: 'Pro Node', price: '$25/mo', desc: '2 vCPU · 4 GB RAM · 40 GB SSD · Weekly backups · Priority support', bullets: ['2 vCPU','4 GB RAM','40 GB SSD','Weekly backups','Priority support'] },
-        { id: 'ultra-node', name: 'Ultra Node', price: '$70/mo', desc: '4 vCPU · 8 GB RAM · 80 GB SSD · Basic HA · Daily backups · 99.9% SLA', bullets: ['4 vCPU','8 GB RAM','80 GB SSD','Basic HA','Daily backups','99.9% SLA'] },
-        { id: 'cloud-engine', name: 'DAIA Cloud Engine — Managed Infrastructure', price: 'Contact', desc: 'Operative Infrastructure: Virtual servers (VPS), firewall, backups, monitoring and security, OS tuning and optimization, data & app migration, direct support and enterprise SLA. Pricing examples: Starter $10/mo · Pro $25/mo · Ultra $70/mo · Enterprise: contact us.', bullets: ['Virtual servers (VPS)','Firewall, backups, monitoring and security','OS tuning and optimization','Data and app migration','Direct technical support and enterprise SLA'] },
-        { id: 'model-marketplace', name: 'Model Marketplace — AI On-Demand', price: 'Pay per use', desc: 'Optimized models ready to use with consumption-based billing. Plug-and-play APIs.', bullets: ['Classification models','Transcription (Whisper)','Anomaly detection','Customer analytics models','Consumption-based billing'] },
-        { id: 'sre-services', name: 'SRE & Professional Services', price: 'From $25', desc: 'Expert support to scale infrastructure and maintain critical operations.', bullets: ['Security hardening','Infrastructure audit','Cost optimization','Critical app deploys','24/7 observability'] },
-        { id: 'monitoring-addon', name: 'Advanced Monitoring (Add-on)', price: '+$5', desc: 'Advanced monitoring and alerts.' },
-        { id: 'backups-addon', name: 'Extra Backups (Add-on)', price: '+$10', desc: 'Additional backups retained according to policy.' },
-        { id: 'deploy-addon', name: 'App Deploy (Add-on)', price: '+$20–80', desc: 'Deployment and configuration of the application on the platform.' },
-        { id: 'security-addon', name: 'Advanced Security (Add-on)', price: '+$30–50', desc: 'Hardening and advanced security rules.' },
-      ]
-    : [
-        { id: 'starter-node', name: 'Starter Node', price: '$10/mo', desc: '1 vCPU · 1 GB RAM · 20 GB SSD · 2 TB transferencia · Gestión básica', bullets: ['1 vCPU','1 GB RAM','20 GB SSD','2 TB transferencia','Gestión básica'] },
-        { id: 'pro-node', name: 'Pro Node', price: '$25/mo', desc: '2 vCPU · 4 GB RAM · 40 GB SSD · Backups semanales · Soporte prioritario', bullets: ['2 vCPU','4 GB RAM','40 GB SSD','Backups semanales','Soporte prioritario'] },
-        { id: 'ultra-node', name: 'Ultra Node', price: '$70/mo', desc: '4 vCPU · 8 GB RAM · 80 GB SSD · Alta disponibilidad básica · Backups diarios · SLA 99.9%', bullets: ['4 vCPU','8 GB RAM','80 GB SSD','Alta disponibilidad básica','Backups diarios','SLA 99.9%'] },
-        { id: 'enterprise', name: 'Enterprise', price: 'Custom', desc: 'Soluciones personalizadas en arquitectura, escalamiento, redundancia, redes privadas y auditorías de seguridad.' },
-        { id: 'cloud-engine', name: 'DAIA Cloud Engine — Infraestructura Gestionada', price: 'Custom', desc: 'Plataforma de servidores cloud con operación completa incluida. Servidores virtuales (VPS) optimizados, seguridad, firewall y hardening, backups automáticos, monitoreo y alertas, optimización del sistema operativo, migración de datos y aplicaciones y soporte técnico con SLA.' , bullets: ['Servidores virtuales (VPS) optimizados','Seguridad, firewall y hardening','Backups automáticos','Monitoreo y alertas','Optimización del sistema operativo','Migración de datos y aplicaciones','Soporte técnico con SLA'] },
-        { id: 'model-marketplace', name: 'Model Marketplace — IA On-Demand', price: 'Custom', desc: 'Modelos listos para integración mediante API. Transcripción (Whisper), modelos de clasificación, modelos de anomalías y análisis de clientes. Enterprise / Custom (pay-per-use).', bullets: ['Transcripción (Whisper)','Modelos de clasificación','Modelos de anomalías','Análisis de clientes','Enterprise / Custom (pay-per-use)'] },
-        { id: 'sre-services', name: 'SRE & Servicios Profesionales', price: 'Desde USD 25', desc: 'Servicios avanzados para optimizar y asegurar entornos productivos. Auditoría de infraestructura, optimización de costos, seguridad avanzada, deploy de aplicaciones críticas y observabilidad 24/7. Desde USD 25 por intervención.', bullets: ['Auditoría de infraestructura','Optimización de costos','Seguridad avanzada','Deploy de aplicaciones críticas','Observabilidad 24/7'] },
-        { id: 'monitoring-addon', name: 'Monitoreo avanzado (Add-on)', price: '+USD 5', desc: 'Monitoreo y alertas avanzadas.' },
-        { id: 'backups-addon', name: 'Backups adicionales (Add-on)', price: '+USD 10', desc: 'Backups adicionales retenidos según política.' },
-        { id: 'deploy-addon', name: 'Deploy y configuración de apps (Add-on)', price: 'USD 20–80', desc: 'Despliegue y configuración de aplicaciones: USD 20–80 según complejidad.' },
-        { id: 'security-addon', name: 'Hardening de seguridad (Add-on)', price: 'USD 30–50', desc: 'Hardening y reglas avanzadas de seguridad: USD 30–50.' },
-      ];
 
   const dict = isEN
     ? {
@@ -118,17 +96,38 @@ export default function DAIAHoldingLanding() {
           focusLinePost: ", DAIA delivers integrated enterprise solutions.",
         },
         units: {
-          title: "Our Core Units",
-          subtitle: "Enterprise solutions powered by: ",
-          activeLabel: "Live",
-          soonLabel: "Development",
-          desc: {
-            labs: "High-performance cloud infrastructure: VPS, Dedicated Virtual Servers and enterprise deployments. Security, scalability and continuous operation.",
-            data:
-              "Enterprise software applications, APIs, integrations and automation solutions for companies requiring quality and results.",
-            props: "Specialized technical support, monitoring, maintenance, remote assistance and dedicated support for enterprises.",
-            pharma: "Advanced analytics, applied AI, intelligent automation and process optimization for enterprise intelligence.",
-            global: "Global cloud expansion and managed services across multiple regions and compliance frameworks.",
+          title: "Service Ecosystems",
+          subtitle: "Specialized B2B solutions powered by: ",
+          data: {
+            title: "DAIA Data & Analytics",
+            desc: "Audit, QA and Intelligence for audio and communications. Configure your volume to get an estimate.",
+            calc: {
+              volLabel: "Monthly Volume (Minutes/Audios)",
+              levelLabel: "Analysis Depth",
+              levels: { basic: "Basic (Transcription)", standard: "Standard (+Sentiment)", advanced: "Advanced (+Custom KPI)" },
+              cta: "Hire Audit Plan",
+              disclaimer: "*Estimated value. Final scope defined in contract."
+            }
+          },
+          support: {
+            title: "DAIA Support",
+            desc: "Operational and technical support packages for mission-critical environments.",
+            plans: {
+              basic: { name: "Essential", price: "$500/mo", features: ["Email Support", "8x5 Coverage", "Basic Monitoring"] },
+              ops: { name: "Operational", price: "$1,200/mo", features: ["Priority Channel", "12x7 Coverage", "Incident Response", "Weekly Reports"] },
+              prio: { name: "Priority", price: "Custom", features: ["Dedicated Agent", "24/7 Coverage", "SLA < 1h", "Architecture Consulting"] }
+            },
+            cta: "Select Plan"
+          },
+          cloud: {
+            title: "DAIA Cloud",
+            desc: "Managed infrastructure and maintenance add-ons. The backbone of our ecosystem.",
+            cta: "Explore Infrastructure"
+          },
+          lab: {
+            title: "DAIA Software Lab",
+            desc: "Internal R&D. We build the tools that power your business. Not available for direct hiring.",
+            badge: "Internal Division"
           },
         },
         what: {
@@ -143,12 +142,16 @@ export default function DAIAHoldingLanding() {
           name: "Full Name",
           email: "Business Email",
           message: "Project Details",
+          context: "Requesting:",
           send: "Submit",
           sending: "Submitting...",
         },
         footer: {
           developedBy: "Built by",
           rights: "© 2025. All rights reserved.",
+          terms: "Terms & Conditions",
+          termsContent: "Here the full text of the terms and conditions of the service would go...",
+          close: "Close",
         },
       }
     : {
@@ -182,17 +185,38 @@ export default function DAIAHoldingLanding() {
           focusLinePost: ", DAIA entrega soluciones empresariales integradas.",
         },
         units: {
-          title: "Nuestras Unidades Centrales",
-          subtitle: "Soluciones empresariales impulsadas por: ",
-          activeLabel: "Activa",
-          soonLabel: "En Desarrollo",
-          desc: {
-            labs: "Infraestructura cloud de alto rendimiento: VPS, Servidores Dedicados y despliegues empresariales. Seguridad, escalabilidad y operación continua.",
-            data:
-              "Aplicaciones de software empresarial, APIs, integraciones y soluciones de automatización para empresas que requieren calidad y resultados.",
-            props: "Soporte técnico especializado, monitoreo, mantenimiento, asistencia remota y soporte dedicado para empresas.",
-            pharma: "Analítica avanzada, IA aplicada, automatización inteligente y optimización de procesos para inteligencia empresarial.",
-            global: "Expansión cloud global y servicios gestionados en múltiples regiones y marcos de cumplimiento.",
+          title: "Ecosistemas de Servicio",
+          subtitle: "Soluciones B2B impulsadas por: ",
+          data: {
+            title: "DAIA Data & Analytics",
+            desc: "Auditoría, QA e Inteligencia sobre audios y comunicaciones. Configura tu volumen para obtener una estimación.",
+            calc: {
+              volLabel: "Volumen Mensual (Minutos/Audios)",
+              levelLabel: "Profundidad de Análisis",
+              levels: { basic: "Básico (Transcripción)", standard: "Estándar (+Sentimiento)", advanced: "Avanzado (+KPIs Custom)" },
+              cta: "Contratar Plan de Auditoría",
+              disclaimer: "*Valor estimado. El alcance final se define en contrato."
+            }
+          },
+          support: {
+            title: "DAIA Support",
+            desc: "Paquetes de soporte operativo y técnico para entornos críticos.",
+            plans: {
+              basic: { name: "Essential", price: "$500/mes", features: ["Soporte Email", "Cobertura 8x5", "Monitoreo Básico"] },
+              ops: { name: "Operational", price: "$1,200/mes", features: ["Canal Prioritario", "Cobertura 12x7", "Respuesta a Incidentes", "Reportes Semanales"] },
+              prio: { name: "Priority", price: "A medida", features: ["Agente Dedicado", "Cobertura 24/7", "SLA < 1h", "Consultoría Arquitectura"] }
+            },
+            cta: "Seleccionar Plan"
+          },
+          cloud: {
+            title: "DAIA Cloud",
+            desc: "Infraestructura gestionada y add-ons de mantenimiento. La columna vertebral de nuestro ecosistema.",
+            cta: "Consultar Infraestructura"
+          },
+          lab: {
+            title: "DAIA Software Lab",
+            desc: "I+D Interno. Construimos las herramientas que potencian tu negocio. No disponible para contratación directa.",
+            badge: "División Interna"
           },
         },
         what: {
@@ -207,14 +231,47 @@ export default function DAIAHoldingLanding() {
           name: "Nombre Completo",
           email: "Email Corporativo",
           message: "Detalles del Proyecto",
+          context: "Solicitando:",
           send: "Enviar",
           sending: "Enviando...",
         },
         footer: {
           developedBy: "Construido por",
           rights: "© 2025. Todos los derechos reservados.",
+          terms: "Términos y Condiciones",
+          termsContent: "Aquí iría el texto completo de los términos y condiciones del servicio...",
+          close: "Cerrar",
         },
       } as const;
+
+  // --- Logic for Data Calculator ---
+  const estimatedDataPrice = useMemo(() => {
+    const { volume, level } = dataConfig;
+    // Base logic: $0.05 per min basic, $0.08 standard, $0.12 advanced
+    let rate = 0.05;
+    if (level === 'standard') rate = 0.08;
+    if (level === 'advanced') rate = 0.12;
+    
+    const total = Math.round(volume * rate);
+    return total < 50 ? 50 : total; // Minimum cap
+  }, [dataConfig]);
+
+  const handleHireData = () => {
+    const text = `${dict.units.data.title} - ${dataConfig.volume} units - ${dataConfig.level} (${isEN ? 'Est.' : 'Est.'} $${estimatedDataPrice})`;
+    setSelectedService(text);
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleHireSupport = (planName: string) => {
+    const text = `${dict.units.support.title} - Plan ${planName}`;
+    setSelectedService(text);
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleHireCloud = () => {
+    setSelectedService(`${dict.units.cloud.title} - General Inquiry`);
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -244,6 +301,7 @@ export default function DAIAHoldingLanding() {
           name,
           email,
           message,
+          service_interest: selectedService || "General Inquiry",
           _subject: `Nuevo mensaje desde DAIA Holding`,
         }),
       });
@@ -280,6 +338,34 @@ export default function DAIAHoldingLanding() {
 
   return (
     <div className="min-h-screen bg-white text-neutral-900 antialiased">
+      {isTermsModalOpen && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm" 
+          onClick={() => setIsTermsModalOpen(false)}
+          aria-modal="true"
+          role="dialog"
+        >
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            className="bg-white rounded-2xl shadow-xl max-w-2xl w-full m-4" 
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="p-6 border-b">
+              <h3 className="text-lg font-semibold">{dict.footer.terms}</h3>
+            </div>
+            <div className="p-6 max-h-[60vh] overflow-y-auto text-sm text-neutral-700 space-y-4">
+              <p>{dict.footer.termsContent}</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi.</p>
+              <p>Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue. Praesent egestas leo in pede.</p>
+            </div>
+            <div className="p-4 bg-neutral-50 rounded-b-2xl text-right">
+              <button onClick={() => setIsTermsModalOpen(false)} className="px-4 py-2 rounded-lg border font-medium bg-white hover:bg-neutral-100">{dict.footer.close}</button>
+            </div>
+          </motion.div>
+        </div>
+      )}
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white/80 backdrop-blur border-b">
         <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
@@ -472,56 +558,129 @@ export default function DAIAHoldingLanding() {
             {dict.units.subtitle}
             <span className="font-semibold"><BrandText text="DAIA Labs" /></span>
           </p>
+          
+          <div className="mt-12 space-y-16">
+            
+            {/* 1. DAIA Data & Analytics (Calculator) */}
+            <div className="bg-white rounded-3xl border shadow-sm overflow-hidden">
+              <div className="p-8 md:p-10 grid lg:grid-cols-2 gap-10 items-center">
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="size-10 rounded-lg bg-[#F59E0B] flex items-center justify-center text-white font-bold text-lg">D</div>
+                    <h3 className="text-2xl font-bold text-neutral-900">{dict.units.data.title}</h3>
+                  </div>
+                  <p className="text-neutral-600 text-lg leading-relaxed">{dict.units.data.desc}</p>
+                  <ul className="mt-6 space-y-2 text-sm text-neutral-700">
+                    <li className="flex items-center gap-2"><span className="text-[#F59E0B]">✓</span> {isEN ? "Audio Transcription & Sentiment" : "Transcripción de Audio y Sentimiento"}</li>
+                    <li className="flex items-center gap-2"><span className="text-[#F59E0B]">✓</span> {isEN ? "Quality Assurance Automation" : "Automatización de QA"}</li>
+                    <li className="flex items-center gap-2"><span className="text-[#F59E0B]">✓</span> {isEN ? "Fraud Detection" : "Detección de Fraude"}</li>
+                  </ul>
+                </div>
+                
+                {/* Calculator UI */}
+                <div className="bg-neutral-50 rounded-2xl p-6 border">
+                  <div className="space-y-5">
+                    <div>
+                      <label className="block text-sm font-semibold text-neutral-800 mb-2">{dict.units.data.calc.volLabel}</label>
+                      <input 
+                        type="range" min="100" max="10000" step="100" 
+                        value={dataConfig.volume} 
+                        onChange={(e) => setDataConfig({...dataConfig, volume: Number(e.target.value)})}
+                        className="w-full accent-[#F59E0B] h-2 bg-neutral-200 rounded-lg appearance-none cursor-pointer"
+                      />
+                      <div className="mt-2 text-right font-mono font-medium text-[#F59E0B]">{dataConfig.volume.toLocaleString()} min</div>
+                    </div>
+                    
+                    <div>
+                      <label className="block text-sm font-semibold text-neutral-800 mb-2">{dict.units.data.calc.levelLabel}</label>
+                      <div className="grid grid-cols-1 gap-2">
+                        {(['basic', 'standard', 'advanced'] as const).map((lvl) => (
+                          <label key={lvl} className={`flex items-center gap-3 p-3 rounded-xl border cursor-pointer transition-colors ${dataConfig.level === lvl ? 'bg-white border-[#F59E0B] ring-1 ring-[#F59E0B]' : 'bg-white border-neutral-200 hover:border-neutral-300'}`}>
+                            <input 
+                              type="radio" name="level" value={lvl} 
+                              checked={dataConfig.level === lvl}
+                              onChange={() => setDataConfig({...dataConfig, level: lvl})}
+                              className="text-[#F59E0B] focus:ring-[#F59E0B]"
+                            />
+                            <span className="text-sm font-medium">{dict.units.data.calc.levels[lvl]}</span>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    <div className="pt-4 border-t flex items-center justify-between">
+                      <div>
+                        <span className="block text-xs text-neutral-500 uppercase tracking-wider">Estimated</span>
+                        <span className="text-3xl font-bold text-neutral-900">${estimatedDataPrice}<span className="text-lg font-normal text-neutral-500">/mo</span></span>
+                      </div>
+                      <button onClick={handleHireData} className="px-5 py-2.5 bg-[#F59E0B] hover:bg-[#d97706] text-white font-semibold rounded-xl transition-colors">
+                        {dict.units.data.calc.cta}
+                      </button>
+                    </div>
+                    <p className="text-xs text-neutral-400 text-center">{dict.units.data.calc.disclaimer}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-          <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <UnitCard
-              title="DAIA Cloud"
-              desc="High-performance cloud infrastructure: VPS, Dedicated Virtual Servers and enterprise deployments. Security, scalability and continuous operation."
-              status="active"
-              accent="#06B6D4"
-              activeLabel={dict.units.activeLabel}
-              soonLabel={dict.units.soonLabel}
-              packages={[
-                { id: 'cloud-vps', name: 'VPS Standard', price: 'From $10/mo' },
-                { id: 'cloud-dedicated', name: 'Dedicated Servers', price: 'Custom' },
-              ]}
-            />
-            <UnitCard
-              title="DAIA Software Lab"
-              desc="Enterprise software applications, APIs, integrations and automation solutions for companies requiring quality and results."
-              status="active"
-              accent="#6C4CE5"
-              activeLabel={dict.units.activeLabel}
-              soonLabel={dict.units.soonLabel}
-              packages={[
-                { id: 'soft-dev', name: 'Custom Development', price: 'By Project' },
-                { id: 'soft-api', name: 'API Integration', price: 'Custom' },
-              ]}
-            />
-            <UnitCard
-              title="DAIA Support"
-              desc="Specialized technical support, monitoring, maintenance, remote assistance and dedicated support for enterprises."
-              status="active"
-              accent="#10B981"
-              activeLabel={dict.units.activeLabel}
-              soonLabel={dict.units.soonLabel}
-              packages={[
-                { id: 'support-basic', name: 'Support Plan Basic', price: 'From $500/mo' },
-                { id: 'support-premium', name: 'Premium Support', price: 'Custom' },
-              ]}
-            />
-            <UnitCard
-              title="DAIA Data & Analytics"
-              desc="Advanced analytics, applied AI, intelligent automation and process optimization for enterprise intelligence."
-              status="active"
-              accent="#F59E0B"
-              activeLabel={dict.units.activeLabel}
-              soonLabel={dict.units.soonLabel}
-              packages={[
-                { id: 'data-analytics', name: 'Analytics Platform', price: 'Custom' },
-                { id: 'data-ai', name: 'AI Solutions', price: 'By Estimate' },
-              ]}
-            />
+            {/* 2. DAIA Support (Packages) */}
+            <div>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="size-10 rounded-lg bg-[#10B981] flex items-center justify-center text-white font-bold text-lg">S</div>
+                <div>
+                  <h3 className="text-2xl font-bold text-neutral-900">{dict.units.support.title}</h3>
+                  <p className="text-neutral-600">{dict.units.support.desc}</p>
+                </div>
+              </div>
+              <div className="grid md:grid-cols-3 gap-6">
+                {[dict.units.support.plans.basic, dict.units.support.plans.ops, dict.units.support.plans.prio].map((plan, i) => (
+                  <div key={i} className="bg-white p-6 rounded-2xl border hover:shadow-md transition-shadow flex flex-col">
+                    <h4 className="font-bold text-lg text-neutral-900">{plan.name}</h4>
+                    <div className="mt-2 text-2xl font-bold text-[#10B981]">{plan.price}</div>
+                    <ul className="mt-6 space-y-3 flex-1">
+                      {plan.features.map((f, j) => (
+                        <li key={j} className="text-sm text-neutral-600 flex items-start gap-2">
+                          <span className="text-[#10B981] mt-0.5">•</span> {f}
+                        </li>
+                      ))}
+                    </ul>
+                    <button 
+                      onClick={() => handleHireSupport(plan.name)}
+                      className="mt-8 w-full py-2 rounded-xl border border-[#10B981] text-[#10B981] font-semibold hover:bg-[#10B981] hover:text-white transition-colors"
+                    >
+                      {dict.units.support.cta}
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* 3. Cloud & Lab (Informational) */}
+            <div className="grid md:grid-cols-2 gap-6">
+              {/* Cloud */}
+              <div className="bg-white p-8 rounded-3xl border shadow-sm relative overflow-hidden group">
+                <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                  <div className="size-32 rounded-full bg-[#06B6D4] blur-2xl"></div>
+                </div>
+                <h3 className="text-xl font-bold text-neutral-900 mb-2">{dict.units.cloud.title}</h3>
+                <p className="text-neutral-600 mb-6">{dict.units.cloud.desc}</p>
+                <button onClick={handleHireCloud} className="text-[#06B6D4] font-semibold hover:underline">
+                  {dict.units.cloud.cta} →
+                </button>
+              </div>
+
+              {/* Lab */}
+              <div className="bg-neutral-900 p-8 rounded-3xl border shadow-sm text-white relative overflow-hidden">
+                <div className="absolute top-4 right-4">
+                  <span className="px-3 py-1 rounded-full bg-white/10 text-xs font-medium border border-white/20">
+                    {dict.units.lab.badge}
+                  </span>
+                </div>
+                <h3 className="text-xl font-bold mb-2 text-[#6C4CE5]">{dict.units.lab.title}</h3>
+                <p className="text-neutral-300 mb-6">{dict.units.lab.desc}</p>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
@@ -546,6 +705,14 @@ export default function DAIAHoldingLanding() {
             method="post"
             onSubmit={handleSubmit}
           >
+            {selectedService && (
+              <div className="md:col-span-2 mb-2 p-3 bg-blue-50 border border-blue-100 rounded-xl flex items-center justify-between">
+                <span className="text-sm text-blue-800 font-medium">
+                  {dict.contact.context} {selectedService}
+                </span>
+                <button type="button" onClick={() => setSelectedService(null)} className="text-blue-500 hover:text-blue-700 text-lg leading-none px-2">×</button>
+              </div>
+            )}
             <input type="hidden" name="_subject" value="Nuevo mensaje desde DAIA Holding" />
             <input
               required
@@ -568,6 +735,7 @@ export default function DAIAHoldingLanding() {
               required
               name="message"
               id="message"
+              defaultValue={selectedService ? `Hola, me interesa contratar: ${selectedService}. \n\nMis dudas son:` : ''}
               placeholder={dict.contact.message}
               className="md:col-span-2 h-32 rounded-xl border p-4 outline-none focus:ring-4"
             />
@@ -595,21 +763,19 @@ export default function DAIAHoldingLanding() {
       <footer className="border-t">
         <div className="mx-auto max-w-6xl px-4 py-8 text-sm text-neutral-600 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p>
-            © 2025 <BrandDAIA /> Holding. {dict.footer.developedBy} <BrandDAIA /> Labs. {dict.footer.rights}
+            © 2025 <BrandDAIA /> Holding. {dict.footer.rights}
           </p>
-          <div className="flex items-center gap-3">
-            <span className="inline-block h-2 w-2 rounded-full" style={{ background: "#6C4CE5" }} />
-            <span className="inline-block h-2 w-2 rounded-full" style={{ background: "#06B6D4" }} />
-            <span className="inline-block h-2 w-2 rounded-full" style={{ background: "#F59E0B" }} />
-            <span className="inline-block h-2 w-2 rounded-full" style={{ background: "#10B981" }} />
+          <div className="flex items-center gap-4">
+            <button type="button" onClick={() => setIsTermsModalOpen(true)} className="hover:underline">
+              {dict.footer.terms}
+            </button>
+            <p>{dict.footer.developedBy} <BrandDAIA /> Labs</p>
           </div>
         </div>
       </footer>
     </div>
   );
 }
- 
-/* UnitCard has been moved to src/components/UnitCard.tsx */
 
 function ServiceCard({ title, text }: { title: string; text: string }) {
   return (

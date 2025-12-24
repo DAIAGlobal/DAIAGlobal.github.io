@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "npx serve@latest out",
     "redeploy": "git commit --allow-empty -m \"chore: force redeploy GitHub Pages\" && git push"
   },
   "dependencies": {
