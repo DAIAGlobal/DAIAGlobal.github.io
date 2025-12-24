@@ -97,7 +97,7 @@ export default function DAIAHoldingLanding() {
         },
         units: {
           title: "Service Ecosystems",
-          subtitle: "Specialized B2B solutions powered by: ",
+          subtitle: "powered by: ",
           data: {
             title: "DAIA Data & Analytics",
             desc: "Audit, QA and Intelligence for audio and communications. Configure your volume to get an estimate.",
