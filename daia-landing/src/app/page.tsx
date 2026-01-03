@@ -3,9 +3,9 @@ import { motion } from "framer-motion";
 import { useEffect, useState, useMemo, type FormEvent, type ReactNode } from "react";
 
 /* ================== Utilidades de marca ================== */
-function BrandDAIA({ className }: { className?: string }) {
+function BrandDAIA({ className = "" }: { className?: string }) {
   return (
-    <span aria-label="DAIA" className={className}>
+    <span className={`inline-flex items-center gap-1 font-black ${className}`}>
       <span className="text-[#6C4CE5]">D</span>
       <span className="text-[#06B6D4]">A</span>
       <span className="text-[#F59E0B]">I</span>
@@ -25,9 +25,9 @@ function BrandText({ text, className }: { text: string; className?: string }) {
   return <span className={className}>{out}</span>;
 }
 
-export default function DAIAHoldingLanding() {
-  const DEFAULT_FORM_ENDPOINT = "https://formspree.io/f/xrbajroz";
-  const FORM_ENDPOINT = process.env.NEXT_PUBLIC_FORM_ENDPOINT || DEFAULT_FORM_ENDPOINT;
+const FORM_ENDPOINT = process.env.NEXT_PUBLIC_FORM_ENDPOINT || "";
+
+export default function Page() {
   const DEFAULT_CONTACT_EMAIL = "daiaglab@gmail.com";
   const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || DEFAULT_CONTACT_EMAIL;
   const [sending, setSending] = useState(false);
@@ -66,79 +66,79 @@ export default function DAIAHoldingLanding() {
 
   const dict = isEN
     ? {
-        nav: { home: "Home", about: "About", mission: "Mission", units: "Subsidiaries", contact: "Contact", talk: "Let’s Talk" },
+        nav: { home: "Home", about: "About", mission: "Mission", units: "Ecosystems", contact: "Contact", talk: "Request Sample Audit" },
         hero: {
-          title: "DAIA Holding: Infrastructure, Technology and Integrated Business Services.",
+          title: "DAIA: Infrastructure, Technology and Integrated Business Services.",
           intro:
-            "A holding company designed to lead cloud solutions, software, support and data with corporate focus and global scalability.",
-          seeUnits: "Explore Units",
-          contact: "Contact Management",
+            "Professional audit and technology services with enterprise focus and scalable delivery.",
+          seeUnits: "Request Sample Audit",
+          contact: "Evaluate Audit Pilot",
         },
         mission: {
           title: "Our Mission & Vision",
-          text: "To advance technological innovation through integrated R&D, infrastructure excellence, and specialized professional services. We believe sustainable business growth stems from combining rigorous research, operational resilience, and strategic execution across diversified markets.",
-          chips: ["Advanced R&D", "Operational Excellence", "Strategic Growth"],
+          text: "To drive measurable business impact through integrated AI, data, and operations, delivering specialized services with enterprise-grade excellence. To be a global reference platform proving that sustainable growth comes from combining advanced technology, continuous R&D, and high-value professional services.",
+          chips: ["AI-Powered Audits", "100% Call Coverage", "Automated Scoring"],
         },
         about: {
           title: "Who We Are",
           body:
-            "DAIA is a technology holding focused on delivering high-performance enterprise solutions. Integrating cloud infrastructure, software development, operational support and analytics, DAIA acts as a complete ecosystem for organizations that need reliable, scalable and secure technology.",
+            "DAIA is a professional audit service that uses AI to analyze calls at scale, delivering automated scoring, compliance verification, and full traceability so operations teams can make data-driven decisions without adding headcount.",
           bullets: [
-            "• 24/7 Operations",
-            "• Corporate Security Protocols",
-            "• Scalable Architectures",
-            "• Modular Services with High Impact",
-            "• International Expansion Vision",
+            "• Continuous AI-driven call auditing",
+            "• Full call coverage, no partial sampling",
+            "• Automated quality and compliance scoring",
+            "• Actionable reports for decision-making",
+            "• Service-based delivery with operational consistency",
           ],
-          focus: "Core Units 2025",
-          focusBadges: ["Cloud Infrastructure", "Software Development", "Technical Support", "Data & Analytics"],
-          focusLinePre: "Operating across ",
-          focusLinePost: ", DAIA delivers integrated enterprise solutions.",
+          focus: "Estimated Operational Impact",
+          focusBadges: ["↓ 60-80% audit time", "↑ 100% call coverage", "↓ QA human error", "↑ Consistent scoring"],
+          focusLinePre: "Results depend on volume and service configuration powered by ",
+          focusLinePost: ", ensuring traceability, scalability, and early-risk alerts.",
         },
         units: {
-          title: "Service Ecosystems",
-          subtitle: "powered by: ",
+          title: "Ecosystems",
+          subtitle: "Ecosystems · Specialized services powered by DAIA Software Labs. Service lines that solve critical business problems, driven by proprietary technology developed by ",
           data: {
             title: "DAIA Data & Analytics",
-            desc: "Audit, QA and Intelligence for audio and communications. Configure your volume to get an estimate.",
+            desc: "Professional AI-based call audit service delivering transcription, sentiment analysis, quality scoring, and compliance verification with traceability, scalability, and operational consistency. From USD 200/mo. Final scope defined contractually.",
             calc: {
               volLabel: "Monthly Volume (Minutes/Audios)",
               levelLabel: "Analysis Depth",
               levels: { basic: "Basic (Transcription)", standard: "Standard (+Sentiment)", advanced: "Advanced (+Custom KPI)" },
-              cta: "Hire Audit Plan",
+              cta: "Request Sample Audit",
               disclaimer: "*Estimated value. Final scope defined in contract."
             }
           },
           support: {
             title: "DAIA Support",
-            desc: "Operational and technical support packages for mission-critical environments.",
+            desc: "Specialized operational support to ensure proper implementation, operation, and evolution of DAIA ecosystems in production.",
             plans: {
-              basic: { name: "Essential", price: "$500/mo", features: ["Email Support", "8x5 Coverage", "Basic Monitoring"] },
-              ops: { name: "Operational", price: "$1,200/mo", features: ["Priority Channel", "12x7 Coverage", "Incident Response", "Weekly Reports"] },
+              basic: { name: "Essential", price: "USD 15/mo", features: ["Email Support", "8x5 Coverage", "Basic Monitoring"] },
+              ops: { name: "Operational", price: "USD 35/mo", features: ["Priority Channel", "12x7 Coverage", "Incident Response", "Weekly Reports"] },
               prio: { name: "Priority", price: "Custom", features: ["Dedicated Agent", "24/7 Coverage", "SLA < 1h", "Architecture Consulting"] }
             },
-            cta: "Select Plan"
+            cta: "Request Volume Quote"
           },
           cloud: {
             title: "DAIA Cloud",
-            desc: "Managed infrastructure and maintenance add-ons. The backbone of our ecosystem.",
-            cta: "Explore Infrastructure"
+            desc: "Internal, scalable, high-performance infrastructure powering DAIA ecosystems, designed for security, reliability, and high-volume processing under enterprise standards.",
+            cta: "Learn About Infrastructure"
           },
           lab: {
             title: "DAIA Software Lab",
-            desc: "Internal R&D. We build the tools that power your business. Not available for direct hiring.",
+            desc: "Internal R&D. We design, train, and evolve the AI models and processing systems that power all DAIA ecosystems. Not available for direct hiring.",
             badge: "Internal Division"
           },
         },
         what: {
           title: "Our Competencies",
-          tech: { title: "Digital Solutions", text: "Custom automation, enterprise applications, SaaS development, and 24/7 technical support." },
-          data: { title: "Data & Cloud", text: "Advanced analytics, cloud architecture, business intelligence, and infrastructure optimization." },
-          re: { title: "Real Estate", text: "Portfolio management, asset optimization, capex planning, and institutional rentals." },
-          global: { title: "Global Trade", text: "Cross-border commerce, tax-optimized invoicing, Free Zone logistics, and export strategy." },
+          tech: { title: "Automated Auditing", text: "Continuous AI-driven analysis of 100% of calls with quality scoring, compliance verification, and detection of critical operational patterns." },
+          data: { title: "Operational Intelligence", text: "Turn audio into actionable metrics: performance trends, sentiment analysis, cost per interaction benchmarks, and early-risk alerts." },
+          re: { title: "Professional Integration", text: "End-to-end implementation with recording system integration, custom report configuration, and operational enablement." },
+          global: { title: "Enterprise Scalability", text: "High-volume processing with enterprise security, full traceability, and ongoing managed service delivery." },
         },
         contact: {
-          title: "Start a Conversation",
+          title: "Request Sample Audit",
           name: "Full Name",
           email: "Business Email",
           message: "Project Details",
@@ -155,9 +155,9 @@ export default function DAIAHoldingLanding() {
         },
       }
     : {
-        nav: { home: "Inicio", about: "Quiénes somos", mission: "Misión", units: "Filiales", contact: "Contacto", talk: "Hablemos" },
+        nav: { home: "Inicio", about: "Quiénes somos", mission: "Misión", units: "Ecosistemas", contact: "Contacto", talk: "Solicitar auditoría de ejemplo" },
         hero: {
-          title: "Automatizamos la auditoría de llamadas con IA para reducir costos operativos, elevar la calidad y garantizar el cumplimiento normativo.",
+          title: "Automatizamos la auditoría de llamadas con IA para reducir costos operativos, elevar la calidad y garantizar el cumplimiento normativo sin aumentar personal.",
           intro:
             "Auditoría profesional para contact centers que necesitan escala, trazabilidad y resultados medibles, sin aumentar carga operativa.",
           seeUnits: "Solicitar auditoría de ejemplo",
@@ -166,32 +166,32 @@ export default function DAIAHoldingLanding() {
         mission: {
           title: "Misión & Visión",
           text: "Promover la innovación tecnológica mediante investigación y desarrollo integrados, entregando servicios especializados de alta excelencia que combinan inteligencia artificial, datos y operación para generar impacto medible y sostenible. Ser una plataforma tecnológica de referencia global, demostrando que el crecimiento empresarial sostenible surge de la integración estratégica entre tecnología avanzada, I+D continuo y servicios profesionales de alto valor.",
-          chips: ["Auditoría Continua con IA", "Cobertura 100% de Llamadas", "Scoring Automatizado"],
+          chips: ["Auditoría IA continua", "Cobertura 100% de llamadas", "Scoring automatizado"],
         },
         about: {
           title: "Quiénes Somos",
           body:
             "DAIA es un servicio profesional de auditoría que utiliza inteligencia artificial para analizar llamadas de contact centers a escala. Entregamos scoring automatizado, verificación de cumplimiento normativo y trazabilidad completa, permitiendo a las operaciones tomar decisiones basadas en datos sin aumentar carga operativa.",
           bullets: [
-            "• Auditoría continua basada en inteligencia artificial",
+            "• Auditoría continua impulsada por IA propia",
             "• Cobertura total de llamadas, sin muestreo parcial",
             "• Scoring automatizado de calidad y cumplimiento normativo",
-            "• Integración con operaciones existentes bajo modelo de servicio profesional",
-            "• Trazabilidad, escalabilidad y consistencia operativa garantizada",
+            "• Reportes accionables para toma de decisiones",
+            "• Modelo de servicio profesional, no software genérico",
           ],
           focus: "Impacto Operativo Estimado",
-          focusBadges: ["↓ 60-80% tiempo auditoría", "↑ 100% cobertura llamadas", "↓ Errores humanos en QA", "↑ Consistencia en scoring"],
-          focusLinePre: "Resultados según volumen y configuración del servicio impulsado por ",
+          focusBadges: ["↓ 60-80% tiempo auditoría", "↑ 100% cobertura llamadas", "↓ errores humanos en QA", "↑ consistencia en scoring"],
+          focusLinePre: "Resultados estimados según volumen y configuración del servicio impulsado por ",
           focusLinePost: ", con trazabilidad, escalabilidad y alertas tempranas para reducir riesgo operativo.",
         },
         units: {
-          title: "Ecosistemas de Servicio",
-          subtitle: "DAIA powered by: ",
+          title: "Ecosistemas",
+          subtitle: "Ecosistemas · Servicios especializados powered by DAIA Software Labs. Los ecosistemas son líneas de servicio que resuelven problemas críticos del negocio, impulsadas por tecnología propia desarrollada por DAIA Software Labs.",
           data: {
             title: "DAIA Data & Analytics",
-            desc: "Servicio profesional de auditoría de llamadas basado en IA que entrega transcripción, análisis de sentimiento, scoring de calidad y verificación de cumplimiento, con trazabilidad, escalabilidad y consistencia operativa.",
+            desc: "Servicio profesional de auditoría de llamadas basado en IA que entrega transcripción, análisis de sentimiento, scoring de calidad y verificación de cumplimiento, con trazabilidad, escalabilidad y consistencia operativa. Desde USD 200 / mes. El alcance final se define contractualmente.",
             calc: {
-              volLabel: "Volumen Mensual (Minutos/Audios)",
+              volLabel: "Volumen mensual (minutos / audios)",
               levelLabel: "Profundidad de Análisis",
               levels: { basic: "Básico (Transcripción)", standard: "Estándar (+Sentimiento)", advanced: "Avanzado (+KPIs Custom)" },
               cta: "Solicitar auditoría de ejemplo",
@@ -200,22 +200,22 @@ export default function DAIAHoldingLanding() {
           },
           support: {
             title: "DAIA Support",
-            desc: "Soporte operativo y acompañamiento continuo para asegurar la correcta implementación, operación y evolución del sistema de auditoría DAIA.",
+            desc: "Soporte operativo especializado para asegurar la correcta implementación, operación y evolución de los ecosistemas DAIA en entornos productivos.",
             plans: {
-              basic: { name: "Essential", price: "$500/mes", features: ["Soporte Email", "Cobertura 8x5", "Monitoreo Básico"] },
-              ops: { name: "Operational", price: "$1,200/mes", features: ["Canal Prioritario", "Cobertura 12x7", "Respuesta a Incidentes", "Reportes Semanales"] },
+              basic: { name: "Essential", price: "USD 15/mes", features: ["Soporte Email", "Cobertura 8x5", "Monitoreo Básico"] },
+              ops: { name: "Operational", price: "USD 35/mes", features: ["Canal Prioritario", "Cobertura 12x7", "Respuesta a Incidentes", "Reportes Semanales"] },
               prio: { name: "Priority", price: "A medida", features: ["Agente Dedicado", "Cobertura 24/7", "SLA < 1h", "Consultoría Arquitectura"] }
             },
             cta: "Solicitar cotización por volumen"
           },
           cloud: {
             title: "DAIA Cloud",
-            desc: "Infraestructura gestionada y add-ons de mantenimiento. La columna vertebral de nuestro ecosistema.",
+            desc: "Infraestructura interna escalable de alto rendimiento que impulsa los ecosistemas DAIA, diseñada para seguridad, confiabilidad y procesamiento de alto volumen bajo estándares enterprise.",
             cta: "Consultar Infraestructura"
           },
           lab: {
             title: "DAIA Software Lab",
-            desc: "I+D Interno. Construimos las herramientas que potencian tu negocio. No disponible para contratación directa.",
+            desc: "DAIA Software Labs. I+D interno. Construimos las herramientas que potencian tu negocio. División responsable del diseño, entrenamiento y evolución de los modelos de IA y sistemas de procesamiento que impulsan todos los ecosistemas DAIA. No disponible para contratación directa.",
             badge: "División Interna"
           },
         },
@@ -247,13 +247,13 @@ export default function DAIAHoldingLanding() {
   // --- Logic for Data Calculator ---
   const estimatedDataPrice = useMemo(() => {
     const { volume, level } = dataConfig;
-    // Base logic: $0.05 per min basic, $0.08 standard, $0.12 advanced
+    // Base logic: USD pricing per minute
     let rate = 0.05;
     if (level === 'standard') rate = 0.08;
     if (level === 'advanced') rate = 0.12;
     
     const total = Math.round(volume * rate);
-    return total < 50 ? 50 : total; // Minimum cap
+    return total < 200 ? 200 : total; // Minimum USD 200
   }, [dataConfig]);
 
   const handleHireData = () => {
@@ -302,7 +302,7 @@ export default function DAIAHoldingLanding() {
           email,
           message,
           service_interest: selectedService || "General Inquiry",
-          _subject: `Nuevo mensaje desde DAIA Holding`,
+          _subject: `Nuevo mensaje desde DAIA`,
         }),
       });
 
@@ -326,7 +326,7 @@ export default function DAIAHoldingLanding() {
 
     // Fallback: abrir cliente de correo
     if (CONTACT_EMAIL) {
-      const subject = encodeURIComponent(isEN ? "New message from DAIA Holding" : "Nuevo mensaje desde DAIA Holding");
+      const subject = encodeURIComponent(isEN ? "New message from DAIA" : "Nuevo mensaje desde DAIA");
       const body = encodeURIComponent((isEN ? `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}` : `Nombre: ${name}\nEmail: ${email}\n\nMensaje:\n${message}`));
       window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
       setSent({ ok: true, message: isEN ? "Opening your email client..." : "Abriendo tu cliente de correo..." });
@@ -446,7 +446,7 @@ export default function DAIAHoldingLanding() {
             transition={{ duration: 0.6 }}
             className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight"
           >
-            <BrandText text={isEN ? "DAIA Holding: Infrastructure, Technology and Integrated Business Services." : "DAIA Holding: Infraestructura, Tecnología y Servicios Empresariales Integrados."} />
+            <BrandText text={dict.hero.title} />
           </motion.h1>
 
           <motion.p
@@ -571,9 +571,10 @@ export default function DAIAHoldingLanding() {
                   </div>
                   <p className="text-neutral-600 text-lg leading-relaxed">{dict.units.data.desc}</p>
                   <ul className="mt-6 space-y-2 text-sm text-neutral-700">
-                    <li className="flex items-center gap-2"><span className="text-[#F59E0B]">✓</span> {isEN ? "Audio Transcription & Sentiment" : "Transcripción de Audio y Sentimiento"}</li>
-                    <li className="flex items-center gap-2"><span className="text-[#F59E0B]">✓</span> {isEN ? "Quality Assurance Automation" : "Automatización de QA"}</li>
-                    <li className="flex items-center gap-2"><span className="text-[#F59E0B]">✓</span> {isEN ? "Fraud Detection" : "Detección de Fraude"}</li>
+                    <li className="flex items-center gap-2"><span className="text-[#F59E0B]">✓</span> {isEN ? "Continuous AI-driven auditing" : "Auditoría continua impulsada por IA propia"}</li>
+                    <li className="flex items-center gap-2"><span className="text-[#F59E0B]">✓</span> {isEN ? "100% call coverage, no sampling" : "Cobertura total de llamadas, sin muestreo parcial"}</li>
+                    <li className="flex items-center gap-2"><span className="text-[#F59E0B]">✓</span> {isEN ? "Automated quality & compliance scoring" : "Scoring automatizado de calidad y cumplimiento normativo"}</li>
+                    <li className="flex items-center gap-2"><span className="text-[#F59E0B]">✓</span> {isEN ? "Actionable reports for decision-making" : "Reportes accionables para toma de decisiones"}</li>
                   </ul>
                 </div>
                 
@@ -583,7 +584,7 @@ export default function DAIAHoldingLanding() {
                     <div>
                       <label className="block text-sm font-semibold text-neutral-800 mb-2">{dict.units.data.calc.volLabel}</label>
                       <input 
-                        type="range" min="100" max="10000" step="100" 
+                        type="range" min="1000" max="10000" step="100" 
                         value={dataConfig.volume} 
                         onChange={(e) => setDataConfig({...dataConfig, volume: Number(e.target.value)})}
                         className="w-full accent-[#F59E0B] h-2 bg-neutral-200 rounded-lg appearance-none cursor-pointer"
@@ -610,8 +611,8 @@ export default function DAIAHoldingLanding() {
                     
                     <div className="pt-4 border-t flex items-center justify-between">
                       <div>
-                        <span className="block text-xs text-neutral-500 uppercase tracking-wider">Estimated</span>
-                        <span className="text-3xl font-bold text-neutral-900">${estimatedDataPrice}<span className="text-lg font-normal text-neutral-500">/mo</span></span>
+                        <span className="block text-xs text-neutral-500 uppercase tracking-wider">{isEN ? "Estimated (USD)" : "Estimado (USD)"}</span>
+                        <span className="text-3xl font-bold text-neutral-900">USD {estimatedDataPrice}<span className="text-lg font-normal text-neutral-500">/mo</span></span>
                       </div>
                       <button onClick={handleHireData} className="px-5 py-2.5 bg-[#F59E0B] hover:bg-[#d97706] text-white font-semibold rounded-xl transition-colors">
                         {dict.units.data.calc.cta}
@@ -713,7 +714,7 @@ export default function DAIAHoldingLanding() {
                 <button type="button" onClick={() => setSelectedService(null)} className="text-blue-500 hover:text-blue-700 text-lg leading-none px-2">×</button>
               </div>
             )}
-            <input type="hidden" name="_subject" value="Nuevo mensaje desde DAIA Holding" />
+            <input type="hidden" name="_subject" value="Nuevo mensaje desde DAIA" />
             <input
               required
               name="name"
@@ -763,7 +764,7 @@ export default function DAIAHoldingLanding() {
       <footer className="border-t">
         <div className="mx-auto max-w-6xl px-4 py-8 text-sm text-neutral-600 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p>
-            © 2025 <BrandDAIA /> Holding. {dict.footer.rights}
+            © 2025 <BrandDAIA />. {dict.footer.rights}
           </p>
           <div className="flex items-center gap-4">
             <button type="button" onClick={() => setIsTermsModalOpen(true)} className="hover:underline">
