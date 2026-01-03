@@ -157,56 +157,56 @@ export default function DAIAHoldingLanding() {
     : {
         nav: { home: "Inicio", about: "Quiénes somos", mission: "Misión", units: "Filiales", contact: "Contacto", talk: "Hablemos" },
         hero: {
-          title: "DAIA Holding: Infraestructura, Tecnología y Servicios Empresariales Integrados.",
+          title: "Automatizamos la auditoría de llamadas con IA para reducir costos operativos, elevar la calidad y garantizar el cumplimiento normativo.",
           intro:
-            "Un holding diseñado para liderar soluciones cloud, software, soporte y datos con enfoque corporativo y escalabilidad global.",
-          seeUnits: "Explorar Unidades",
-          contact: "Contactar Dirección",
+            "Auditoría profesional para contact centers que necesitan escala, trazabilidad y resultados medibles, sin aumentar carga operativa.",
+          seeUnits: "Solicitar auditoría de ejemplo",
+          contact: "Evaluar piloto de auditoría",
         },
         mission: {
           title: "Misión & Visión",
-          text: "Promover la innovación tecnológica mediante I+D integrada, excelencia en infraestructura y servicios profesionales especializados. Creemos que el crecimiento empresarial sostenible surge de combinar investigación rigurosa, resiliencia operacional y ejecución estratégica en mercados diversificados.",
-          chips: ["I+D Avanzada", "Excelencia Operacional", "Crecimiento Estratégico"],
+          text: "Promover la innovación tecnológica mediante investigación y desarrollo integrados, entregando servicios especializados de alta excelencia que combinan inteligencia artificial, datos y operación para generar impacto medible y sostenible. Ser una plataforma tecnológica de referencia global, demostrando que el crecimiento empresarial sostenible surge de la integración estratégica entre tecnología avanzada, I+D continuo y servicios profesionales de alto valor.",
+          chips: ["Auditoría Continua con IA", "Cobertura 100% de Llamadas", "Scoring Automatizado"],
         },
         about: {
           title: "Quiénes Somos",
           body:
-            "DAIA es un holding tecnológico orientado a entregar soluciones empresariales de alto desempeño. Integrando infraestructura cloud, desarrollo de software, soporte operativo y analítica, DAIA actúa como un ecosistema completo para organizaciones que necesitan tecnología confiable, escalable y segura.",
+            "DAIA es un servicio profesional de auditoría que utiliza inteligencia artificial para analizar llamadas de contact centers a escala. Entregamos scoring automatizado, verificación de cumplimiento normativo y trazabilidad completa, permitiendo a las operaciones tomar decisiones basadas en datos sin aumentar carga operativa.",
           bullets: [
-            "• Operación 24/7",
-            "• Protocolos de Seguridad Corporativa",
-            "• Arquitecturas Escalables",
-            "• Servicios Modulares de Alto Impacto",
-            "• Visión de Expansión Internacional",
+            "• Auditoría continua basada en inteligencia artificial",
+            "• Cobertura total de llamadas, sin muestreo parcial",
+            "• Scoring automatizado de calidad y cumplimiento normativo",
+            "• Integración con operaciones existentes bajo modelo de servicio profesional",
+            "• Trazabilidad, escalabilidad y consistencia operativa garantizada",
           ],
-          focus: "Unidades Centrales 2025",
-          focusBadges: ["Infraestructura Cloud", "Desarrollo de Software", "Soporte Técnico", "Data & Analytics"],
-          focusLinePre: "Operando en ",
-          focusLinePost: ", DAIA entrega soluciones empresariales integradas.",
+          focus: "Impacto Operativo Estimado",
+          focusBadges: ["↓ 60-80% tiempo auditoría", "↑ 100% cobertura llamadas", "↓ Errores humanos en QA", "↑ Consistencia en scoring"],
+          focusLinePre: "Resultados según volumen y configuración del servicio impulsado por ",
+          focusLinePost: ", con trazabilidad, escalabilidad y alertas tempranas para reducir riesgo operativo.",
         },
         units: {
           title: "Ecosistemas de Servicio",
-          subtitle: "Soluciones B2B impulsadas por: ",
+          subtitle: "DAIA powered by: ",
           data: {
             title: "DAIA Data & Analytics",
-            desc: "Auditoría, QA e Inteligencia sobre audios y comunicaciones. Configura tu volumen para obtener una estimación.",
+            desc: "Servicio profesional de auditoría de llamadas basado en IA que entrega transcripción, análisis de sentimiento, scoring de calidad y verificación de cumplimiento, con trazabilidad, escalabilidad y consistencia operativa.",
             calc: {
               volLabel: "Volumen Mensual (Minutos/Audios)",
               levelLabel: "Profundidad de Análisis",
               levels: { basic: "Básico (Transcripción)", standard: "Estándar (+Sentimiento)", advanced: "Avanzado (+KPIs Custom)" },
-              cta: "Contratar Plan de Auditoría",
+              cta: "Solicitar auditoría de ejemplo",
               disclaimer: "*Valor estimado. El alcance final se define en contrato."
             }
           },
           support: {
             title: "DAIA Support",
-            desc: "Paquetes de soporte operativo y técnico para entornos críticos.",
+            desc: "Soporte operativo y acompañamiento continuo para asegurar la correcta implementación, operación y evolución del sistema de auditoría DAIA.",
             plans: {
               basic: { name: "Essential", price: "$500/mes", features: ["Soporte Email", "Cobertura 8x5", "Monitoreo Básico"] },
               ops: { name: "Operational", price: "$1,200/mes", features: ["Canal Prioritario", "Cobertura 12x7", "Respuesta a Incidentes", "Reportes Semanales"] },
               prio: { name: "Priority", price: "A medida", features: ["Agente Dedicado", "Cobertura 24/7", "SLA < 1h", "Consultoría Arquitectura"] }
             },
-            cta: "Seleccionar Plan"
+            cta: "Solicitar cotización por volumen"
           },
           cloud: {
             title: "DAIA Cloud",
@@ -221,13 +221,13 @@ export default function DAIAHoldingLanding() {
         },
         what: {
           title: "Nuestras Competencias",
-          tech: { title: "Soluciones Digitales", text: "Automatización personalizada, aplicaciones empresariales, desarrollo SaaS y soporte técnico 24/7." },
-          data: { title: "Data y Cloud", text: "Analítica avanzada, arquitectura cloud, inteligencia empresarial y optimización de infraestructura." },
-          re: { title: "Real Estate", text: "Gestión de cartera, optimización de activos, planificación capex y rentales institucionales." },
-          global: { title: "Comercio Global", text: "Comercio transfronterizo, facturación con optimización fiscal, logística en Zona Franca y estrategia de exportación." },
+          tech: { title: "Auditoría Automatizada", text: "Análisis continuo basado en IA del 100% de llamadas con scoring de calidad, cumplimiento normativo y detección de patrones operativos críticos." },
+          data: { title: "Inteligencia Operativa", text: "Transformación de audio en métricas accionables: tendencias de desempeño, análisis de sentimiento, benchmarks de costo por interacción y alertas tempranas." },
+          re: { title: "Integración Profesional", text: "Implementación de extremo a extremo con integración de sistemas de grabación, configuración de reportes personalizados y capacitación operativa." },
+          global: { title: "Escalabilidad Garantizada", text: "Procesamiento de alto volumen con arquitectura cloud enterprise, seguridad de datos, trazabilidad completa y modelo de servicio profesional continuo." },
         },
         contact: {
-          title: "Iniciar una Conversación",
+          title: "Solicitar Auditoría de Ejemplo",
           name: "Nombre Completo",
           email: "Email Corporativo",
           message: "Detalles del Proyecto",
