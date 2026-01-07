@@ -25,7 +25,7 @@ function BrandText({ text, className }: { text: string; className?: string }) {
   return <span className={className}>{out}</span>;
 }
 
-const FORM_ENDPOINT = process.env.NEXT_PUBLIC_FORM_ENDPOINT || "";
+const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbxIRb8KsAHsCk-8_gE81iEIJbxqcLxYx5S8UH5_CVVb6aTM52wL4_w-_28BRi3qFBh8/exec";
 const DATA_PRICING_LEVELS = {
   basic: { rate: 0.06 },
   standard: { rate: 0.09 },
