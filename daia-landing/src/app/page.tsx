@@ -33,7 +33,7 @@ const DATA_PRICING_LEVELS = {
 } as const;
 
 export default function Page() {
-  const DEFAULT_CONTACT_EMAIL = "daiaglab@gmail.com";
+  const DEFAULT_CONTACT_EMAIL = "daia@daiaglobal.com";
   const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || DEFAULT_CONTACT_EMAIL;
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState<null | { ok: boolean; message: string }>(null);
