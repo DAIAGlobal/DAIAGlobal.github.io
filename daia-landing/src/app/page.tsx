@@ -26,6 +26,11 @@ function BrandText({ text, className }: { text: string; className?: string }) {
 }
 
 const FORM_ENDPOINT = process.env.NEXT_PUBLIC_FORM_ENDPOINT || "";
+const DATA_PRICING_LEVELS = {
+  basic: { rate: 0.06 },
+  standard: { rate: 0.09 },
+  advanced: { rate: 0.14 },
+} as const;
 
 export default function Page() {
   const DEFAULT_CONTACT_EMAIL = "daiaglab@gmail.com";
@@ -100,21 +105,27 @@ export default function Page() {
           subtitle: "Ecosystems · Specialized services powered by DAIA Software Labs. Service lines that solve critical business problems, driven by proprietary technology developed by ",
           data: {
             title: "DAIA Data & Analytics",
-            desc: "Professional AI-based call audit service delivering transcription, sentiment analysis, quality scoring, and compliance verification with traceability, scalability, and operational consistency. From USD 200/mo. Final scope defined contractually.",
+            desc: "Professional AI call audit service for QA and voice intelligence, focused on quality, compliance, and operational improvement. Base price: USD 200/mo. Final scope defined contractually.",
             calc: {
               volLabel: "Monthly Volume (Minutes/Audios)",
               levelLabel: "Analysis Depth",
               levels: { basic: "Basic (Transcription)", standard: "Standard (+Sentiment)", advanced: "Advanced (+Custom KPI)" },
               cta: "Request Sample Audit",
-              disclaimer: "*Estimated value. Final scope defined in contract."
+              disclaimer: "*Estimated value. Final scope defined in contract.",
+              basePrice: "Base price: USD 200/mo",
+              upgradeHint: "Higher volumes may benefit from upgrading plans.",
+              equivalenceTitle: "Optimization examples",
+              equivalence: ["4,000 min Basic ≈ 1,000 min Standard", "2,500 min Standard ≈ 1,000 min Advanced"],
+              howPriceTitle: "How pricing is calculated",
+              howPriceBullets: ["A base monthly fee", "An incremental cost per processed minute", "Upper tiers include deeper analysis and better efficiency at scale"]
             }
           },
           support: {
             title: "DAIA Support",
             desc: "Specialized operational support to ensure proper implementation, operation, and evolution of DAIA ecosystems in production.",
             plans: {
-              basic: { name: "Essential", price: "USD 15/mo", features: ["Email Support", "8x5 Coverage", "Basic Monitoring"] },
-              ops: { name: "Operational", price: "USD 35/mo", features: ["Priority Channel", "12x7 Coverage", "Incident Response", "Weekly Reports"] },
+              basic: { name: "Essential", price: "USD 45/mo", features: ["Email Support", "8x5 Coverage", "Basic Monitoring"] },
+              ops: { name: "Operational", price: "USD 120/mo", features: ["Priority Channel", "12x7 Coverage", "Incident Response", "Weekly Reports"] },
               prio: { name: "Priority", price: "Custom", features: ["Dedicated Agent", "24/7 Coverage", "SLA < 1h", "Architecture Consulting"] }
             },
             cta: "Request Volume Quote"
@@ -122,7 +133,8 @@ export default function Page() {
           cloud: {
             title: "DAIA Cloud",
             desc: "Internal, scalable, high-performance infrastructure powering DAIA ecosystems, designed for security, reliability, and high-volume processing under enterprise standards.",
-            cta: "Learn About Infrastructure"
+            cta: "Learn About Infrastructure",
+            badge: "In development"
           },
           lab: {
             title: "DAIA Software Lab",
@@ -132,10 +144,19 @@ export default function Page() {
         },
         what: {
           title: "Our Competencies",
-          tech: { title: "Automated Auditing", text: "Continuous AI-driven analysis of 100% of calls with quality scoring, compliance verification, and detection of critical operational patterns." },
-          data: { title: "Operational Intelligence", text: "Turn audio into actionable metrics: performance trends, sentiment analysis, cost per interaction benchmarks, and early-risk alerts." },
-          re: { title: "Professional Integration", text: "End-to-end implementation with recording system integration, custom report configuration, and operational enablement." },
-          global: { title: "Enterprise Scalability", text: "High-volume processing with enterprise security, full traceability, and ongoing managed service delivery." },
+          tech: { title: "Call Auditing", text: "AI-powered QA with 100% coverage, automated scoring, and evidence by turn for coaching and operations." },
+          data: { title: "QA Automation", text: "Rule engines and AI detectors to automate checklists, compliance flags, and recurring QA workflows." },
+          re: { title: "Sentiment & CX Analysis", text: "Layered sentiment, intent, and experience signals to anticipate churn and detect critical events early." },
+          global: { title: "Compliance & Standards", text: "Processes aligned to ISO 18295, ISO 9001, ISO 27001 with full traceability and auditable reporting." },
+        },
+        how: {
+          title: "How the service works",
+          steps: [
+            "Client signs the plan",
+            "Shares audio files via Drive / shared folder / SFTP",
+            "DAIA processes and audits",
+            "Client receives individual and consolidated reports (PDF + DOCX)",
+          ],
         },
         contact: {
           title: "Request Sample Audit",
@@ -189,21 +210,27 @@ export default function Page() {
           subtitle: "Ecosistemas · Servicios especializados powered by DAIA Software Labs. Los ecosistemas son líneas de servicio que resuelven problemas críticos del negocio, impulsadas por tecnología propia desarrollada por DAIA Software Labs.",
           data: {
             title: "DAIA Data & Analytics",
-            desc: "Servicio profesional de auditoría de llamadas basado en IA que entrega transcripción, análisis de sentimiento, scoring de calidad y verificación de cumplimiento, con trazabilidad, escalabilidad y consistencia operativa. Desde USD 200 / mes. El alcance final se define contractualmente.",
+            desc: "Auditoría profesional de llamadas con IA. Auditoría, QA e inteligencia sobre comunicaciones de voz orientada a calidad, cumplimiento y mejora operativa. Scoring automatizado, verificación de cumplimiento y analítica operativa con trazabilidad. Precio base: USD 200 / mes. El alcance final se define contractualmente.",
             calc: {
               volLabel: "Volumen mensual (minutos / audios)",
               levelLabel: "Profundidad de Análisis",
               levels: { basic: "Básico (Transcripción)", standard: "Estándar (+Sentimiento)", advanced: "Avanzado (+KPIs Custom)" },
               cta: "Solicitar auditoría de ejemplo",
-              disclaimer: "*Valor estimado. El alcance final se define en contrato."
+              disclaimer: "*Valor estimado. El alcance final se define en contrato.",
+              basePrice: "Precio base: USD 200 / mes",
+              upgradeHint: "A mayor volumen, puede convenir escalar de plan.",
+              equivalenceTitle: "Ejemplo de optimización",
+              equivalence: ["4.000 min en Básico ≈ 1.000 min en Estándar", "2.500 min en Estándar ≈ 1.000 min en Avanzado"],
+              howPriceTitle: "Cómo se calcula el precio",
+              howPriceBullets: ["Un costo base mensual", "Un costo incremental por minuto procesado", "Los planes superiores incluyen análisis más profundo y mayor eficiencia por volumen"]
             }
           },
           support: {
             title: "DAIA Support",
             desc: "Soporte operativo especializado para asegurar la correcta implementación, operación y evolución de los ecosistemas DAIA en entornos productivos.",
             plans: {
-              basic: { name: "Essential", price: "USD 15/mes", features: ["Soporte Email", "Cobertura 8x5", "Monitoreo Básico"] },
-              ops: { name: "Operational", price: "USD 35/mes", features: ["Canal Prioritario", "Cobertura 12x7", "Respuesta a Incidentes", "Reportes Semanales"] },
+              basic: { name: "Essential", price: "USD 45/mes", features: ["Soporte Email", "Cobertura 8x5", "Monitoreo Básico"] },
+              ops: { name: "Operational", price: "USD 120/mes", features: ["Canal Prioritario", "Cobertura 12x7", "Respuesta a Incidentes", "Reportes Semanales"] },
               prio: { name: "Priority", price: "A medida", features: ["Agente Dedicado", "Cobertura 24/7", "SLA < 1h", "Consultoría Arquitectura"] }
             },
             cta: "Solicitar cotización por volumen"
@@ -211,7 +238,8 @@ export default function Page() {
           cloud: {
             title: "DAIA Cloud",
             desc: "Infraestructura interna escalable de alto rendimiento que impulsa los ecosistemas DAIA, diseñada para seguridad, confiabilidad y procesamiento de alto volumen bajo estándares enterprise.",
-            cta: "Consultar Infraestructura"
+            cta: "Consultar Infraestructura",
+            badge: "En desarrollo"
           },
           lab: {
             title: "DAIA Software Lab",
@@ -221,10 +249,19 @@ export default function Page() {
         },
         what: {
           title: "Nuestras Competencias",
-          tech: { title: "Auditoría Automatizada", text: "Análisis continuo basado en IA del 100% de llamadas con scoring de calidad, cumplimiento normativo y detección de patrones operativos críticos." },
-          data: { title: "Inteligencia Operativa", text: "Transformación de audio en métricas accionables: tendencias de desempeño, análisis de sentimiento, benchmarks de costo por interacción y alertas tempranas." },
-          re: { title: "Integración Profesional", text: "Implementación de extremo a extremo con integración de sistemas de grabación, configuración de reportes personalizados y capacitación operativa." },
-          global: { title: "Escalabilidad Garantizada", text: "Procesamiento de alto volumen con arquitectura cloud enterprise, seguridad de datos, trazabilidad completa y modelo de servicio profesional continuo." },
+          tech: { title: "Auditoría de llamadas", text: "QA con IA, cobertura 100%, scoring automatizado y evidencia turno a turno para coaching y operación." },
+          data: { title: "Automatización de QA", text: "Motores de reglas y detectores IA para automatizar checklists, banderas de cumplimiento y workflows recurrentes de QA." },
+          re: { title: "Análisis de sentimiento y CX", text: "Capas de sentimiento, intención y señales de experiencia para anticipar churn y detectar eventos críticos temprano." },
+          global: { title: "Compliance y normas", text: "Procesos alineados a ISO 18295, ISO 9001, ISO 27001 con trazabilidad completa y reportes auditables." },
+        },
+        how: {
+          title: "Cómo funciona el servicio",
+          steps: [
+            "El cliente contrata un plan",
+            "Comparte los audios por Drive / carpeta compartida / SFTP",
+            "DAIA procesa y audita",
+            "El cliente recibe reportes individuales y consolidados (PDF + DOCX)",
+          ],
         },
         contact: {
           title: "Solicitar Auditoría de Ejemplo",
@@ -247,14 +284,33 @@ export default function Page() {
   // --- Logic for Data Calculator ---
   const estimatedDataPrice = useMemo(() => {
     const { volume, level } = dataConfig;
-    // Base logic: USD pricing per minute
-    let rate = 0.05;
-    if (level === 'standard') rate = 0.08;
-    if (level === 'advanced') rate = 0.12;
-    
-    const total = Math.round(volume * rate);
-    return total < 200 ? 200 : total; // Minimum USD 200
+    const base = 200;
+    const rate = DATA_PRICING_LEVELS[level].rate;
+    const variable = volume * rate;
+    return Math.max(base, Math.round(base + variable));
   }, [dataConfig]);
+
+  const dataFeatures = useMemo(
+    () =>
+      isEN
+        ? [
+            "Automatic transcription",
+            "Sentiment analysis",
+            "Risk and critical event detection",
+            "Quality and performance metrics",
+            "Professional reports (PDF + Word)",
+          ]
+        : [
+            "Transcripción automática",
+            "Análisis de sentimiento",
+            "Detección de riesgos y eventos críticos",
+            "Métricas de calidad y desempeño",
+            "Reportes profesionales (PDF + Word)",
+          ],
+    [isEN]
+  );
+
+  const currentRate = DATA_PRICING_LEVELS[dataConfig.level].rate;
 
   const handleHireData = () => {
     const text = `${dict.units.data.title} - ${dataConfig.volume} units - ${dataConfig.level} (${isEN ? 'Est.' : 'Est.'} $${estimatedDataPrice})`;
@@ -571,11 +627,16 @@ export default function Page() {
                   </div>
                   <p className="text-neutral-600 text-lg leading-relaxed">{dict.units.data.desc}</p>
                   <ul className="mt-6 space-y-2 text-sm text-neutral-700">
-                    <li className="flex items-center gap-2"><span className="text-[#F59E0B]">✓</span> {isEN ? "Continuous AI-driven auditing" : "Auditoría continua impulsada por IA propia"}</li>
-                    <li className="flex items-center gap-2"><span className="text-[#F59E0B]">✓</span> {isEN ? "100% call coverage, no sampling" : "Cobertura total de llamadas, sin muestreo parcial"}</li>
-                    <li className="flex items-center gap-2"><span className="text-[#F59E0B]">✓</span> {isEN ? "Automated quality & compliance scoring" : "Scoring automatizado de calidad y cumplimiento normativo"}</li>
-                    <li className="flex items-center gap-2"><span className="text-[#F59E0B]">✓</span> {isEN ? "Actionable reports for decision-making" : "Reportes accionables para toma de decisiones"}</li>
+                    {dataFeatures.map((f) => (
+                      <li key={f} className="flex items-center gap-2">
+                        <span className="text-[#F59E0B]">✓</span> {f}
+                      </li>
+                    ))}
                   </ul>
+                  <div className="mt-4 text-sm text-neutral-700 bg-neutral-50 border rounded-xl p-4">
+                    <div className="font-semibold text-neutral-900">{dict.units.data.calc.basePrice}</div>
+                    <p className="mt-1 text-neutral-700">{isEN ? "Final value is calculated by volume and depth of analysis." : "El valor final se calcula según volumen y profundidad de análisis."} {dict.units.data.calc.upgradeHint}</p>
+                  </div>
                 </div>
                 
                 {/* Calculator UI */}
@@ -590,6 +651,10 @@ export default function Page() {
                         className="w-full accent-[#F59E0B] h-2 bg-neutral-200 rounded-lg appearance-none cursor-pointer"
                       />
                       <div className="mt-2 text-right font-mono font-medium text-[#F59E0B]">{dataConfig.volume.toLocaleString()} min</div>
+                    </div>
+                    <div className="flex items-center justify-between text-sm text-neutral-700 bg-white border rounded-xl p-3">
+                      <div className="font-semibold">{dict.units.data.calc.basePrice}</div>
+                      <div className="text-neutral-900 font-semibold">+ USD {currentRate.toFixed(2)} / min</div>
                     </div>
                     
                     <div>
@@ -617,6 +682,23 @@ export default function Page() {
                       <button onClick={handleHireData} className="px-5 py-2.5 bg-[#F59E0B] hover:bg-[#d97706] text-white font-semibold rounded-xl transition-colors">
                         {dict.units.data.calc.cta}
                       </button>
+                    </div>
+                    <div className="space-y-3 text-sm text-neutral-700 bg-white border rounded-xl p-4">
+                      <div className="font-semibold text-neutral-900">{dict.units.data.calc.howPriceTitle}</div>
+                      <ul className="list-disc ml-5 space-y-1">
+                        {dict.units.data.calc.howPriceBullets.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="space-y-2 text-sm text-neutral-700 bg-white border rounded-xl p-4">
+                      <div className="font-semibold text-neutral-900">{dict.units.data.calc.equivalenceTitle}</div>
+                      <ul className="list-disc ml-5 space-y-1">
+                        {dict.units.data.calc.equivalence.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                      <p className="text-xs text-neutral-500">{dict.units.data.calc.upgradeHint}</p>
                     </div>
                     <p className="text-xs text-neutral-400 text-center">{dict.units.data.calc.disclaimer}</p>
                   </div>
@@ -663,6 +745,11 @@ export default function Page() {
                 <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                   <div className="size-32 rounded-full bg-[#06B6D4] blur-2xl"></div>
                 </div>
+                <div className="absolute top-4 right-4">
+                  <span className="px-3 py-1 rounded-full bg-[#06B6D4]/10 text-xs font-medium border border-[#06B6D4]/30 text-[#065f6d]">
+                    {dict.units.cloud.badge}
+                  </span>
+                </div>
                 <h3 className="text-xl font-bold text-neutral-900 mb-2">{dict.units.cloud.title}</h3>
                 <p className="text-neutral-600 mb-6">{dict.units.cloud.desc}</p>
                 <button onClick={handleHireCloud} className="text-[#06B6D4] font-semibold hover:underline">
@@ -683,6 +770,19 @@ export default function Page() {
             </div>
 
           </div>
+        </div>
+      </section>
+
+      {/* Cómo funciona */}
+      <section className="mx-auto max-w-6xl px-4 py-16">
+        <h2 className="text-3xl font-extrabold tracking-tight">{dict.how.title}</h2>
+        <div className="mt-8 grid md:grid-cols-4 gap-6">
+          {dict.how.steps.map((step, idx) => (
+            <div key={step} className="bg-white border rounded-2xl p-5 shadow-sm">
+              <div className="size-9 rounded-full bg-neutral-900 text-white flex items-center justify-center font-semibold mb-3">{idx + 1}</div>
+              <p className="text-sm text-neutral-800 leading-relaxed">{step}</p>
+            </div>
+          ))}
         </div>
       </section>
 
