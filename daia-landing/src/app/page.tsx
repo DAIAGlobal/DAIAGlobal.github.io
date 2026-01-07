@@ -33,8 +33,6 @@ const DATA_PRICING_LEVELS = {
 } as const;
 
 export default function Page() {
-  const DEFAULT_CONTACT_EMAIL = "daia@daiaglobal.com";
-  const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || DEFAULT_CONTACT_EMAIL;
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState<null | { ok: boolean; message: string }>(null);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -161,6 +159,7 @@ export default function Page() {
         contact: {
           title: "Request Sample Audit",
           name: "Full Name",
+          company: "Company",
           email: "Business Email",
           message: "Project Details",
           context: "Requesting:",
@@ -266,6 +265,7 @@ export default function Page() {
         contact: {
           title: "Solicitar Auditoría de Ejemplo",
           name: "Nombre Completo",
+          company: "Empresa",
           email: "Email Corporativo",
           message: "Detalles del Proyecto",
           context: "Solicitando:",
@@ -338,11 +338,13 @@ export default function Page() {
     // Honeypot anti-spam
     if ((data.get("_gotcha") as string)?.length) return;
 
-    const name = (data.get("name") as string)?.trim();
+    const nombre = (data.get("nombre") as string)?.trim();
+    const empresa = (data.get("empresa") as string)?.trim();
     const email = (data.get("email") as string)?.trim();
-    const message = (data.get("message") as string)?.trim();
+    const mensaje = (data.get("mensaje") as string)?.trim();
+    const servicio = (data.get("servicio") as string)?.trim() || "General";
 
-    if (!name || !email || !message) {
+    if (!nombre || !email || !mensaje) {
       setSent({ ok: false, message: isEN ? "Please complete all fields." : "Completa todos los campos." });
       return;
     }
@@ -354,21 +356,17 @@ export default function Page() {
         method: 'POST',
         headers: { Accept: 'application/json' },
         body: new URLSearchParams({
-          name,
+          nombre,
+          empresa,
           email,
-          message,
-          service_interest: selectedService || "General Inquiry",
-          _subject: `Nuevo mensaje desde DAIA`,
+          mensaje,
+          servicio,
         }),
       });
 
       if (resp.ok) {
         form.reset();
         setSent({ ok: true, message: isEN ? "Thanks! We’ll get back to you soon." : "¡Gracias! Te responderemos pronto." });
-        // Redirección suave a página de gracias (relativa para respetar basePath)
-        setTimeout(() => {
-          window.location.href = 'gracias/';
-        }, 600);
       } else {
         const text = await resp.text();
         setSent({ ok: false, message: (isEN ? 'Could not send. ' : 'No se pudo enviar. ') + (text || '') });
@@ -379,17 +377,6 @@ export default function Page() {
     } finally {
       setSending(false);
     }
-
-    // Fallback: abrir cliente de correo
-    if (CONTACT_EMAIL) {
-      const subject = encodeURIComponent(isEN ? "New message from DAIA" : "Nuevo mensaje desde DAIA");
-      const body = encodeURIComponent((isEN ? `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}` : `Nombre: ${name}\nEmail: ${email}\n\nMensaje:\n${message}`));
-      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-      setSent({ ok: true, message: isEN ? "Opening your email client..." : "Abriendo tu cliente de correo..." });
-      return;
-    }
-
-    setSent({ ok: false, message: isEN ? "Configure NEXT_PUBLIC_FORM_ENDPOINT or NEXT_PUBLIC_CONTACT_EMAIL." : "Configura NEXT_PUBLIC_FORM_ENDPOINT o NEXT_PUBLIC_CONTACT_EMAIL." });
   }
 
   return (
@@ -804,6 +791,7 @@ export default function Page() {
           <form
             className="mt-8 grid md:grid-cols-2 gap-4"
             method="post"
+            action={FORM_ENDPOINT}
             onSubmit={handleSubmit}
           >
             {selectedService && (
@@ -814,13 +802,20 @@ export default function Page() {
                 <button type="button" onClick={() => setSelectedService(null)} className="text-blue-500 hover:text-blue-700 text-lg leading-none px-2">×</button>
               </div>
             )}
-            <input type="hidden" name="_subject" value="Nuevo mensaje desde DAIA" />
+            <input type="hidden" name="servicio" value={selectedService || "General"} />
             <input
               required
-              name="name"
-              id="name"
+              name="nombre"
+              id="nombre"
               autoComplete="name"
               placeholder={dict.contact.name}
+              className="h-11 rounded-xl border px-4 outline-none focus:ring-4"
+            />
+            <input
+              name="empresa"
+              id="empresa"
+              autoComplete="organization"
+              placeholder={dict.contact.company}
               className="h-11 rounded-xl border px-4 outline-none focus:ring-4"
             />
             <input
@@ -834,8 +829,8 @@ export default function Page() {
             />
             <textarea
               required
-              name="message"
-              id="message"
+              name="mensaje"
+              id="mensaje"
               defaultValue={selectedService ? `Hola, me interesa contratar: ${selectedService}. \n\nMis dudas son:` : ''}
               placeholder={dict.contact.message}
               className="md:col-span-2 h-32 rounded-xl border p-4 outline-none focus:ring-4"
